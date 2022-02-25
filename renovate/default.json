@@ -1,0 +1,20 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:base",
+        ":timezone(CET)",
+        "schedule:nonOfficeHours",
+        ":disableRateLimiting",
+        ":disableDependencyDashboard",
+        ":rebaseStalePrs"
+    ],
+    "packageRules": [
+        {
+            "matchDepTypes": [
+                "action"
+            ],
+            "pinDigests": true,
+            "rangeStrategy": "pin"
+        }
+    ]
+}
