@@ -8,6 +8,7 @@
         ":disableDependencyDashboard",
         ":rebaseStalePrs"
     ],
+    "gitAuthor": "Renovate Bot <1842438+RenovateBot@users.noreply.github.com>",
     "packageRules": [
         {
             "matchDepTypes": [
