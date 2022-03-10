@@ -5,8 +5,7 @@
         ":timezone(CET)",
         "schedule:nonOfficeHours",
         ":disableRateLimiting",
-        ":disableDependencyDashboard",
-        ":rebaseStalePrs"
+        ":disableDependencyDashboard"
     ],
     "packageRules": [
         {
