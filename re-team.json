@@ -1,7 +1,7 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "github>SonarSource/renovate-config",
+        "github>SonarSource/renovate-config:slim",
         ":maintainLockFilesWeekly",
         ":enablePreCommit",
         "docker:enableMajor",
