@@ -6,5 +6,10 @@
         ":enablePreCommit",
         "docker:enableMajor",
         "docker:pinDigests"
-    ]
+    ],
+    "github-actions": {
+        "fileMatch": [
+            "^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"
+        ]
+    }
 }
