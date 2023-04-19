@@ -1,0 +1,19 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "github-actions": {
+        "fileMatch": [
+            "^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"
+        ],
+        "versioning": "semver-coerced"
+    },
+    "packageRules": [
+        {
+            "matchDepTypes": [
+                "action"
+            ],
+            "pinDigests": true,
+            "rangeStrategy": "pin",
+            "rollbackPrs": true
+        }
+    ]
+}

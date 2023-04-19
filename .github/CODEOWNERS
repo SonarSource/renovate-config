@@ -1,2 +1,3 @@
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 * @sonarsource/re-team
+cpe-team.json @sonarsource/sonarcloud-cpe-team

@@ -5,16 +5,7 @@
         ":timezone(CET)",
         "schedule:nonOfficeHours",
         ":disableRateLimiting",
-        ":disableDependencyDashboard"
-    ],
-    "packageRules": [
-        {
-            "matchDepTypes": [
-                "action"
-            ],
-            "pinDigests": true,
-            "rangeStrategy": "pin",
-            "rollbackPrs": true
-        }
+        ":disableDependencyDashboard",
+        "github>SonarSource/renovate-config//presets/pin-github-action"
     ]
 }

@@ -1,0 +1,16 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "packageRules": [
+        {
+            "groupName": "github-action non-major dependencies",
+            "groupSlug": "github-action-minor-patch",
+            "matchDepTypes": [
+                "action"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ]
+        }
+    ]
+}
