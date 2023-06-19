@@ -1,0 +1,26 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config:slim"
+    ],
+    "schedule": [
+        "at any time"
+    ],
+    "enabledManagers": [
+        "regex"
+    ],
+    "packageRules": [
+        {
+            "matchManagers": ["regex"],
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+).(?<build>\\d+)?$"
+        }
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": ["^Dockerfile$"],
+            "matchStrings": [
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
+            ]
+        }
+    ]
+}
