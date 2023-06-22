@@ -17,9 +17,9 @@
     ],
     "regexManagers": [
         {
-            "fileMatch": ["^Dockerfile$"],
+            "fileMatch": ["^snapshot-generation.sh$"],
             "matchStrings": [
-                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sENV .*?_VERSION=(?<currentValue>.*)\\s"
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sexport .*?_VERSION=(?<currentValue>.*)\\s"
             ]
         }
     ]
