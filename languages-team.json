@@ -4,7 +4,7 @@
         "github>SonarSource/renovate-config:slim"
     ],
     "schedule": [
-        "at any time"
+        "30 8-18 * * 1-5"
     ],
     "enabledManagers": [
         "regex"
