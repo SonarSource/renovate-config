@@ -4,11 +4,12 @@
         "github>SonarSource/renovate-config:slim"
     ],
     "schedule": [
-        "30 8-18 * * 1-5"
+        "every 1 hour after 8am and before 7pm on weekday"
     ],
     "enabledManagers": [
         "regex"
     ],
+    "dependencyDashboard": true,
     "packageRules": [
         {
             "matchManagers": ["regex"],
