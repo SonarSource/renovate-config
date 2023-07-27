@@ -7,9 +7,26 @@
         "docker:enableMajor",
         "docker:pinDigests"
     ],
+    "labels": ["golden-ami"],
+    "enabledManagers": ["github-actions", "regex"],
     "github-actions": {
-        "fileMatch": [
-            "^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"
-        ]
-    }
+        "fileMatch": ["^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"]
+    },
+    "packageRules": [
+        {
+            "matchManagers": ["regex"],
+            "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$"],
+            "labels": ["golden-ami"]
+        }
+    ],
+    "regexManagers": [
+        {
+            "fileMatch": [".*pkrvars.hcl$", ".*tfvars$"],
+            "matchStrings": [
+                ".*amiFilter=(?<packageName>.*?)\\n(.*currentImageName=(?<currentDigest>.*?)\\n)?(.*\\n)?.*?(?<depName>[a-zA-Z0-9-_:]*)[ ]*?[:|=][ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?.*"
+            ],
+            "datasourceTemplate": "aws-machine-image",
+            "versioningTemplate": "aws-machine-image"
+        }
+    ]
 }

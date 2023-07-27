@@ -11,7 +11,11 @@ The renovate app must be enabled for the repository and configured on the defaul
 }
 ```
 
-## team-languages
+## re-team
+
+Updates github-actions and AWS AMIs provided by the Internal Security Team.
+
+## languages-team
 
 Replaces version strings in `snapshot-generation.sh`.
 
@@ -20,7 +24,7 @@ Replaces version strings in `snapshot-generation.sh`.
 export <NAME>_VERSION=<version>
 ```
 Where:
-- `data-source-name`: use github-releases, it is explicitly defined for documentation reasons
+- `data-source-name`: the renovate datasource. Use github-releases
 - `repository-name`: github owner/repo name to check for new releases
 - `NAME`: use a descriptive variable name for storing the release version
 - `version`: version number to use and check updates for in the format of `MAJOR.MINOR.PATCH.BUILD`
