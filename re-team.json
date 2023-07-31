@@ -7,7 +7,6 @@
         "docker:enableMajor",
         "docker:pinDigests"
     ],
-    "labels": ["golden-ami"],
     "enabledManagers": ["github-actions", "regex"],
     "github-actions": {
         "fileMatch": ["^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"]
@@ -16,7 +15,7 @@
         {
             "matchManagers": ["regex"],
             "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$"],
-            "labels": ["golden-ami"]
+            "addLabels": ["golden-ami"]
         }
     ],
     "regexManagers": [
