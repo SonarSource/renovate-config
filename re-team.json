@@ -14,7 +14,7 @@
     "packageRules": [
         {
             "matchManagers": ["regex"],
-            "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$", "^cdk.context.json$"],
+            "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$", ".*\\/cdk.context.json$"],
             "addLabels": ["golden-ami"]
         }
     ],
@@ -30,7 +30,7 @@
         {
             "fileMatch": ["^cdk.context.json$"],
             "matchStrings": [
-                ".*[\\\"|\"]?ami:account=[0-9]+:filters\\.image-type\\.0=machine:filters\\.name\\.0=(?<imageName>.*?):filters\\.state\\.0=available:owners\\.0=(?<imageOwner>.*?):region=eu-central-1[\\\"|\"]?:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
+                ".*[\\\"|\"]ami:account=[0-9]{12}:filters\\.image-type\\.0=machine:filters\\.name\\.0=(?<imageName>.*?):filters\\.state\\.0=available:owners\\.0=(?<imageOwner>.*?):.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
             ],
             "datasourceTemplate": "aws-machine-image",
             "versioningTemplate": "aws-machine-image",
