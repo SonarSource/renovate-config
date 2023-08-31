@@ -15,7 +15,7 @@
         {
             "matchManagers": ["regex"],
             "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$", ".*\\/cdk.context.json$"],
-            "addLabels": ["golden-ami"]
+            "labels": ["golden-ami"]
         }
     ],
     "regexManagers": [
