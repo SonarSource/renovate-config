@@ -13,8 +13,7 @@
     },
     "packageRules": [
         {
-            "matchManagers": ["regex"],
-            "matchFileNames": [".*pkrvars.hcl$", ".*tfvars$", ".*\\/cdk.context.json$"],
+            "matchPackagePatterns": [".*sonar-(ubuntu|windowsserver)-.*"],
             "addLabels": ["golden-ami"]
         }
     ],
@@ -30,11 +29,11 @@
         {
             "fileMatch": ["^cdk.context.json$"],
             "matchStrings": [
-                ".*[\\\"|\"]ami:account=[0-9]{12}:filters\\.image-type\\.0=machine:filters\\.name\\.0=(?<imageName>.*?):filters\\.state\\.0=available:owners\\.0=(?<imageOwner>.*?):.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
+                ".*[\\\"|\"]ami:account=[0-9]{12}:filters\\.image-type\\.0=(?<imageType>.*?):filters\\.name\\.0=(?<imageName>.*?):.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
             ],
             "datasourceTemplate": "aws-machine-image",
             "versioningTemplate": "aws-machine-image",
-            "packageNameTemplate": "[{\"Name\":\"owner-id\",\"Values\":[\"{{{imageOwner}}}\"]},{\"Name\":\"name\",\"Values\":[\"{{{imageName}}}\"]}]",
+            "packageNameTemplate": "[{\"Name\":\"name\",\"Values\":[\"{{{imageName}}}\"]},{\"Name\":\"state\",\"Values\":[\"available\"]},{\"Name\":\"image-type\",\"Values\":[\"{{{imageType}}}\"]},{\"Name\":\"is-public\",\"Values\":[\"false\"]}]",
             "depNameTemplate": "{{{replace ' \\*' '' imageName}}}"
         }
     ]
