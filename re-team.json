@@ -1,13 +1,15 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "github>SonarSource/renovate-config:slim",
+        "github>SonarSource/renovate-config",
         ":maintainLockFilesWeekly",
         ":enablePreCommit",
         "docker:enableMajor",
         "docker:pinDigests"
     ],
     "enabledManagers": ["github-actions", "regex"],
+    "configMigration": true,
+    "addLabels": ["dependencies"],
     "github-actions": {
         "fileMatch": ["^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"]
     },
