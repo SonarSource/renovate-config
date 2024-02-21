@@ -7,8 +7,13 @@
         "at any time"
     ],
     "enabledManagers": [
+        "github-actions",
         "regex"
     ],
+    "addLabels": ["dependencies"],
+    "github-actions": {
+        "fileMatch": ["^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"]
+    },
     "packageRules": [
         {
             "matchManagers": ["regex"],
