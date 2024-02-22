@@ -7,8 +7,10 @@
         "at any time"
     ],
     "enabledManagers": [
+        "github-actions",
         "regex"
     ],
+    "addLabels": ["dependencies"],
     "packageRules": [
         {
             "matchManagers": ["regex"],
