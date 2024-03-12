@@ -37,6 +37,12 @@
             "versioningTemplate": "aws-machine-image",
             "packageNameTemplate": "[{\"Name\":\"name\",\"Values\":[\"{{{imageName}}}\"]},{\"Name\":\"state\",\"Values\":[\"available\"]},{\"Name\":\"image-type\",\"Values\":[\"{{{imageType}}}\"]},{\"Name\":\"is-public\",\"Values\":[\"false\"]}]",
             "depNameTemplate": "{{{replace ' \\*' '' imageName}}}"
+        },
+        {
+            "fileMatch": ["^lib.star$"],
+            "matchStrings": [
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*CIRRUS_AGENT_VERSION\": \"(?<currentValue>.*)\""
+            ]
         }
     ]
 }
