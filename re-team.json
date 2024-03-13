@@ -7,21 +7,36 @@
         "docker:enableMajor",
         "docker:pinDigests"
     ],
-    "enabledManagers": ["github-actions", "regex"],
+    "enabledManagers": [
+        "github-actions",
+        "custom.regex"
+    ],
     "configMigration": true,
-    "addLabels": ["dependencies"],
+    "addLabels": [
+        "dependencies"
+    ],
     "github-actions": {
-        "fileMatch": ["^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"]
+        "fileMatch": [
+            "^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"
+        ]
     },
     "packageRules": [
         {
-            "matchPackagePatterns": [".*sonar-(ubuntu|windowsserver)-.*"],
-            "addLabels": ["golden-ami"]
+            "matchPackagePatterns": [
+                ".*sonar-(ubuntu|windowsserver)-.*"
+            ],
+            "addLabels": [
+                "golden-ami"
+            ]
         }
     ],
-    "regexManagers": [
+    "customManagers": [
         {
-            "fileMatch": [".*pkrvars.hcl$", ".*tfvars$"],
+            "customType": "regex",
+            "fileMatch": [
+                ".*pkrvars.hcl$",
+                ".*tfvars$"
+            ],
             "matchStrings": [
                 ".*amiFilter=(?<packageName>.*?)\\n(.*currentImageName=(?<currentDigest>.*?)\\n)?(.*\\n)?.*?(?<depName>[a-zA-Z0-9-_:]*)[ ]*?[:|=][ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?.*"
             ],
@@ -29,7 +44,10 @@
             "versioningTemplate": "aws-machine-image"
         },
         {
-            "fileMatch": ["^cdk.context.json$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^cdk.context.json$"
+            ],
             "matchStrings": [
                 ".*[\\\"|\"]ami:account=[0-9]{12}:filters\\.image-type\\.0=(?<imageType>.*?):filters\\.name\\.0=(?<imageName>.*?):.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
             ],
@@ -39,7 +57,10 @@
             "depNameTemplate": "{{{replace ' \\*' '' imageName}}}"
         },
         {
-            "fileMatch": ["^lib.star$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^lib.star$"
+            ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*CIRRUS_AGENT_VERSION\": \"(?<currentValue>.*)\""
             ]
