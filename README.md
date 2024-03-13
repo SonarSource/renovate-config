@@ -62,3 +62,21 @@ export KOTLIN_VERSION=2.15.0.2579
 - `depName`: GitHub owner/repo name to check for new releases.
 - after the `export` directive use a descriptive variable name for storing the release version. The version number in the format
   of `MAJOR.MINOR.PATCH.BUILD` and is managed by Renovate.
+
+## Development
+
+### Prerequisites
+
+- Renovate CLI, for instance https://www.npmjs.com/package/renovate
+
+### Local Testing
+
+Copy the configuration to test to the target repository in `.github/renovate.json`.
+
+Remove the `extends` key and eventually replace it with the content of the preset files.
+
+Run Renovate locally:
+
+```bash
+GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local
+```
