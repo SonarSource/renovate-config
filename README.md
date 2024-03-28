@@ -21,8 +21,6 @@ Enables the `github-actions` manager.
 
 Updates GitHub Actions and Amazon Machine Images.
 
-Updates cirrus-modules.
-
 ### Updating AWS Machine Images in Terraform and Packer projects
 
 Replaces version strings in `*.pkrvars.hcl` and `*.tfvars` files.
