@@ -64,6 +64,16 @@
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*CIRRUS_AGENT_VERSION\": \"(?<currentValue>.*)\""
             ]
+        },
+        {
+            "customType": "regex",
+            "fileMatch": [
+                "^.cirrus.star$"
+            ],
+            "matchStrings": [
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*load.*\"github.com\\/.*@(?<currentValue>[a-f0-9.]+)\",.*",
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*load.*\"github.com\\/.*@(?<currentDigest>[a-f0-9]+)\",.* # (?<currentValue>.*)"
+            ]
         }
     ]
 }

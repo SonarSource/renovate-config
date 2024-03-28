@@ -47,6 +47,20 @@ Replaces version strings in `cdk.context.json` files. Works
 with [LookupMachineImage](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/LookupMachineImage.html). Only the `name` parameter
 is used by the manager. Any additional parameters such as `filters` are ignored.
 
+### Updating CirrusCI modules in main Starlark file
+
+Replaces CirrusCI modules version or digest strings in `.cirrus.star` file.
+
+#### Example
+
+```starlark
+# renovate: datasource=github-releases depName=SonarSource/cirrus-modules
+load("github.com/SonarSource/cirrus-modules@2.9.0", "load_features")
+
+# renovate: datasource=github-releases depName=SonarSource/cirrus-modules
+load("github.com/SonarSource/cirrus-modules@54babd3268dd6daf42ad877100789169a14e5fb3", "load_features")  # 2.9.0
+```
+
 ## [languages-team](languages-team.json)
 
 Replaces version strings in `snapshot-generation.sh`.
