@@ -1,31 +1,34 @@
-# re-renovate
+# @SonarSource/renovate-config
 
-Renovate presets
+[Shareable config](https://renovatebot.com/docs/config-presets/) for Renovate.
 
-The renovate app must be enabled for the repository and configured on the default branch using `.github/renovate.json`:
+## Setup
 
-```json
+1. The [Renovate app](https://developer.mend.io/) must be enabled for the repository. Reach out to the [DevInfra Squad](https://sonarsource.enterprise.slack.com/archives/C04CVEU7734) if that is not the case.
+2. Add `.github/renovate.json` to the repository 
+```json title="index.json"
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>SonarSource/renovate-config:re-team"
+    "github>SonarSource/renovate-config:slim"
   ]
 }
 ```
 
-## [slim](slim.json)
+## Presets
+### [`slim`](slim.json)
 
 Enables the `github-actions` manager.
 
-## [re-team](re-team.json)
+### [`re-team`](re-team.json)
 
-Updates GitHub Actions and Amazon Machine Images.
+Enables the `github-actions` manager and the `custom` manager for updating Amazon Machine Images and CirrusCI modules.
 
-### Updating AWS Machine Images in Terraform and Packer projects
+#### Updating AWS Machine Images in Terraform and Packer projects
 
 Replaces version strings in `*.pkrvars.hcl` and `*.tfvars` files.
 
-#### Example
+##### Example
 
 ```bash
 # amiFilter=[{"Name":"image-type","Values":["machine"]},{"Name":"name","Values":["sonar-image"]},{"Name":"state","Values":["available"]},{"Name":"is-public","Values":["false"]}]
@@ -39,17 +42,17 @@ sonar_ami_id = "ami-123456789012"
 - currentImageName: The name of the current image. Managed by renovate.
 - image_id: The ID of the current image. Managed by renovate.
 
-### Updating AWS Machine Images in CDK projects
+#### Updating AWS Machine Images in CDK projects
 
 Replaces version strings in `cdk.context.json` files. Works
 with [LookupMachineImage](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/LookupMachineImage.html). Only the `name` parameter
 is used by the manager. Any additional parameters such as `filters` are ignored.
 
-### Updating CirrusCI modules in main Starlark file
+#### Updating CirrusCI modules in main Starlark file
 
 Replaces CirrusCI modules version or digest strings in `.cirrus.star` file.
 
-#### Example
+##### Example
 
 ```starlark
 # renovate: datasource=github-releases depName=SonarSource/cirrus-modules
@@ -59,11 +62,11 @@ load("github.com/SonarSource/cirrus-modules@2.9.0", "load_features")
 load("github.com/SonarSource/cirrus-modules@54babd3268dd6daf42ad877100789169a14e5fb3", "load_features")  # 2.9.0
 ```
 
-## [languages-team](languages-team.json)
+### [`languages-team`](languages-team.json)
 
-Replaces version strings in `snapshot-generation.sh`.
+Enables the `custom` manager for replacing version strings in `snapshot-generation.sh`.
 
-#### Example
+##### Example
 
 ```bash
 # renovate: datasource=github-releases depName=SonarSource/sonar-kotlin
@@ -79,7 +82,8 @@ export KOTLIN_VERSION=2.15.0.2579
 
 ### Prerequisites
 
-- Renovate CLI, for instance https://www.npmjs.com/package/renovate
+- NodeJS
+- [Renovate CLI](https://www.npmjs.com/package/renovate)
 
 ### Local Testing
 
