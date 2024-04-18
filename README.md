@@ -34,6 +34,12 @@ Replaces version strings in `*.pkrvars.hcl` and `*.tfvars` files.
 # amiFilter=[{"Name":"image-type","Values":["machine"]},{"Name":"name","Values":["sonar-image"]},{"Name":"state","Values":["available"]},{"Name":"is-public","Values":["false"]}]
 # currentImageName=sonar-image-1.0
 sonar_ami_id = "ami-123456789012"
+
+amis = {
+  # amiFilter=[{"Name":"image-type","Values":["machine"]},{"Name":"name","Values":["sonar-image"]},{"Name":"state","Values":["available"]},{"Name":"is-public","Values":["false"]}]
+  # currentImageName=sonar-image-1.0
+  "ubuntu-20.04" = "ami-123456789012"
+}
 ```
 
 - amiFilter: Use
