@@ -9,7 +9,8 @@
     ],
     "enabledManagers": [
         "github-actions",
-        "custom.regex"
+        "custom.regex",
+        "maven"
     ],
     "configMigration": true,
     "addLabels": [
