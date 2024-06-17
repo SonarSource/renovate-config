@@ -10,7 +10,10 @@
     "enabledManagers": [
         "github-actions",
         "custom.regex",
-        "maven"
+        "maven",
+        "npm",
+        "poetry",
+        "pipenv"
     ],
     "configMigration": true,
     "addLabels": [
