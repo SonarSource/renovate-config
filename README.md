@@ -10,7 +10,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>SonarSource/renovate-config:slim"
+    "github>SonarSource/renovate-config"
   ]
 }
 ```
