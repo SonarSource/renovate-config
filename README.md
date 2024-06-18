@@ -2,25 +2,22 @@
 
 [Shareable config](https://renovatebot.com/docs/config-presets/) for Renovate.
 
-## Setup
+## Presets
 
-1. The [Renovate app](https://developer.mend.io/) must be enabled for the repository. Reach out to the [DevInfra Squad](https://sonarsource.enterprise.slack.com/archives/C04CVEU7734) if that is not the case.
-2. Add `.github/renovate.json` to the repository 
-```json title="index.json"
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>SonarSource/renovate-config"
-  ]
-}
+### [`default`](default.json)
+
+```json
+  "extends": ["github>SonarSource/renovate-config"]
 ```
 
-## Presets
-### [`slim`](slim.json)
+Provides authentication credentials to https://repox.jfrog.io. The following package managers were tested for compatibility: `npm`, `maven`, `gradle`, `pipenv`, `poetry`, and `nuget`.
 
-Enables the `github-actions` manager.
+> Note: authentication only works when Renovate is executed using the GitHub app. If you are running locally, see the instructions at [local-testing](#local-testing).
 
 ### [`re-team`](re-team.json)
+```json
+  "extends": ["github>SonarSource/renovate-config:re-team"]
+```
 
 Enables the `github-actions` manager and the `custom` manager for updating Amazon Machine Images and CirrusCI modules.
 
@@ -69,6 +66,9 @@ load("github.com/SonarSource/cirrus-modules@54babd3268dd6daf42ad877100789169a14e
 ```
 
 ### [`languages-team`](languages-team.json)
+```json
+  "extends": ["github>SonarSource/renovate-config:languates-team"]
+```
 
 Enables the `custom` manager for replacing version strings in `snapshot-generation.sh`.
 
@@ -93,12 +93,26 @@ export KOTLIN_VERSION=2.15.0.2579
 
 ### Local Testing
 
-Copy the configuration to test to the target repository in `.github/renovate.json`.
+Make changes in your local `.github/renovate.json` file. You might want to reference a shareable config from a branch:
 
-Remove the `extends` key and eventually replace it with the content of the preset files.
+```json
+    "extends": ["github>SonarSource/renovate-config:re-team#feat/BUILD-1234"]
+```
 
-Run Renovate locally:
+
+then run Renovate locally:
 
 ```bash
 GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local
+```
+
+**Note**: authentication to repox does not work when running locally. You have to override the hostRules in your renovate config:
+
+```json
+"hostRules": [
+    {
+        "matchHost": "repox.jfrog.io",
+        "token": "repox-identity-token"
+    }
+]
 ```
