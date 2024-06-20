@@ -38,7 +38,7 @@
         {
             "customType": "regex",
             "fileMatch": [
-                ".*pkrvars.hcl$",
+                ".*pkrvars\\.hcl$",
                 ".*tfvars$"
             ],
             "matchStrings": [
@@ -51,7 +51,7 @@
         {
             "customType": "regex",
             "fileMatch": [
-                "^cdk.context.json$"
+                "^cdk\\.context\\.json$"
             ],
             "matchStrings": [
                 ".*[\\\"|\"]ami:account=[0-9]{12}:filters\\.image-type\\.0=(?<imageType>.*?):filters\\.name\\.0=(?<imageName>.*?):.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
@@ -64,7 +64,7 @@
         {
             "customType": "regex",
             "fileMatch": [
-                "^lib.star$"
+                "^lib\\.star$"
             ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*CIRRUS_AGENT_VERSION\": \"(?<currentValue>.*)\""
@@ -73,12 +73,22 @@
         {
             "customType": "regex",
             "fileMatch": [
-                "^.cirrus.star$"
+                "^\\.cirrus\\.star$"
             ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*load.*\"github.com\\/.*@(?<currentValue>[a-f0-9.]+)\",.*",
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*load.*\"github.com\\/.*@(?<currentDigest>[a-f0-9]+)\",.* # (?<currentValue>.*)"
             ]
+        },
+        {
+            "customType": "regex",
+            "fileMatch": [
+                "^\\.cirrus\\.ya?ml$"
+            ],
+            "matchStrings": [
+                "image: (?<depName>ghcr\\.io.*?)(@(?<currentDigest>sha256:[a-f0-9]{64}) # |:)(?<currentValue>v?[.\\d]+)"
+            ],
+            "datasourceTemplate": "docker"
         }
     ]
 }
