@@ -16,7 +16,7 @@
         },
         {
             "matchDatasources": ["maven"],
-            "registryUrls": ["https://repox.jfrog.io/artifactory/sonarsource-releases", "https://repox.jfrog.io/artifactory/central"]
+            "registryUrls": ["https://repox.jfrog.io/artifactory/sonarsource-releases", "https://repox.jfrog.io/artifactory/central","https://repox.jfrog.io/artifactory/plugins.gradle.org"]
         }
     ],
     "hostRules": [
