@@ -19,9 +19,9 @@ Provides authentication credentials to https://repox.jfrog.io. The following pac
   "extends": ["github>SonarSource/renovate-config:re-team"]
 ```
 
-Enables the `github-actions` manager and the `custom` manager for updating Amazon Machine Images and CirrusCI modules.
+Enables the `github-actions` manager and `custom` managers for updating Amazon Machine Images, Cirrus CI modules, and Cirrus CI CLI.
 
-#### Updating AWS Machine Images in Terraform and Packer projects
+#### AWS Machine Images in Terraform and Packer projects
 
 Replaces version strings in `*.pkrvars.hcl` and `*.tfvars` files.
 
@@ -45,15 +45,15 @@ amis = {
 - currentImageName: The name of the current image. Managed by renovate.
 - image_id: The ID of the current image. Managed by renovate.
 
-#### Updating AWS Machine Images in CDK projects
+#### AWS Machine Images in CDK projects
 
 Replaces version strings in `cdk.context.json` files. Works
 with [LookupMachineImage](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/LookupMachineImage.html). Only the `name` parameter
 is used by the manager. Any additional parameters such as `filters` are ignored.
 
-#### Updating CirrusCI modules in main Starlark file
+#### Cirrus CI modules in the main Starlark files
 
-Replaces CirrusCI modules version or digest strings in `.cirrus.star` file.
+Replaces Cirrus CI modules version or digest strings in `.cirrus.star` and `lib.star` files.
 
 ##### Example
 
@@ -63,6 +63,20 @@ load("github.com/SonarSource/cirrus-modules@2.9.0", "load_features")
 
 # renovate: datasource=github-releases depName=SonarSource/cirrus-modules
 load("github.com/SonarSource/cirrus-modules@54babd3268dd6daf42ad877100789169a14e5fb3", "load_features")  # 2.9.0
+```
+
+#### ghcr.io Docker images in Cirrus CI YAML file
+
+Replaces ghcr.io Docker images version in `.cirrus.yaml`, `.cirrus.yml`.
+
+##### Example
+
+```yaml
+  image: ghcr.io/cirruslabs/cirrus-cli:v0.106.0
+```
+or
+```yaml
+  image: ghcr.io/cirruslabs/cirrus-cli@sha256:d3fab24e08d1fd7f85826dc1513186bb5423710fdd497e6d9b85debd08d88b42 # v0.106.0
 ```
 
 ### [`languages-team`](languages-team.json)
