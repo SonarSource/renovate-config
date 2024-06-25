@@ -13,7 +13,8 @@
         "maven",
         "npm",
         "poetry",
-        "pipenv"
+        "pipenv",
+        "terraform"
     ],
     "configMigration": true,
     "addLabels": [
