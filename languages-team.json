@@ -10,16 +10,22 @@
         "github-actions",
         "regex"
     ],
-    "addLabels": ["dependencies"],
+    "addLabels": [
+        "dependencies"
+    ],
     "packageRules": [
         {
-            "matchManagers": ["regex"],
+            "matchManagers": [
+                "regex"
+            ],
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+).(?<build>\\d+)?$"
         }
     ],
     "regexManagers": [
         {
-            "fileMatch": ["^snapshot-generation.sh$"],
+            "fileMatch": [
+                "^snapshot-generation.sh$"
+            ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\sexport .*?_VERSION=(?<currentValue>.*)\\s"
             ]

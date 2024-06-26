@@ -9,15 +9,24 @@
     ],
     "packageRules": [
         {
-            "matchDepTypes": ["action"],
+            "matchDepTypes": [
+                "action"
+            ],
             "pinDigests": true,
             "rangeStrategy": "pin",
             "rollbackPrs": true
         },
         {
-            "matchDatasources": ["maven"],
-            "matchPackagePatterns": ["^org.sonarsource", "^com.sonarsource"],
-            "registryUrls": ["https://repox.jfrog.io/artifactory/sonarsource-releases"]
+            "matchDatasources": [
+                "maven"
+            ],
+            "matchPackagePatterns": [
+                "^org.sonarsource",
+                "^com.sonarsource"
+            ],
+            "registryUrls": [
+                "https://repox.jfrog.io/artifactory/sonarsource-releases"
+            ]
         }
     ],
     "hostRules": [
