@@ -14,9 +14,9 @@ Provides authentication credentials to https://repox.jfrog.io. The following pac
 
 > Note: authentication only works when Renovate is executed using the GitHub app. If you are running locally, see the instructions at [local-testing](#local-testing).
 
-### [`re-team`](re-team.json)
+### [`dev-infra-squad`](dev-infra-squad.json)
 ```json
-  "extends": ["github>SonarSource/renovate-config:re-team"]
+  "extends": ["github>SonarSource/renovate-config:dev-infra-squad"]
 ```
 
 Enables the `github-actions` manager and `custom` managers for updating Amazon Machine Images, Cirrus CI modules, and Cirrus CI CLI.
@@ -110,7 +110,7 @@ export KOTLIN_VERSION=2.15.0.2579
 Make changes in your local `.github/renovate.json` file. You might want to reference a shareable config from a branch:
 
 ```json
-    "extends": ["github>SonarSource/renovate-config:re-team#feat/BUILD-1234"]
+    "extends": ["github>SonarSource/renovate-config:dev-infra-squad#feat/BUILD-1234"]
 ```
 
 
