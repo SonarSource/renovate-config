@@ -83,6 +83,16 @@
         {
             "customType": "regex",
             "fileMatch": [
+                ".*\\.sh$",
+                ".*\\.?Dockerfile"
+            ],
+            "matchStrings": [
+                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
+            ]
+        },
+        {
+            "customType": "regex",
+            "fileMatch": [
                 "^\\.cirrus\\.ya?ml$"
             ],
             "matchStrings": [
