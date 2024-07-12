@@ -7,6 +7,11 @@
         "docker:enableMajor",
         "docker:pinDigests"
     ],
+    "timezone": "Europe/Paris",
+    "schedule": [
+        "after 8am every weekday",
+        "before 5pm every weekday"
+    ],
     "enabledManagers": [
         "github-actions",
         "custom.regex",
