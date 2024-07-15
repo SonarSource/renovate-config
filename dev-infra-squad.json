@@ -33,7 +33,7 @@
     "packageRules": [
         {
             "matchPackagePatterns": [
-                ".*sonar-(ubuntu|windowsserver)-.*"
+                ".*sonar-(ubuntu|windowsserver|amazon|centos)-.*"
             ],
             "addLabels": [
                 "golden-ami"
