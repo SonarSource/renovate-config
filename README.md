@@ -117,16 +117,5 @@ Make changes in your local `.github/renovate.json` file. You might want to refer
 then run Renovate locally:
 
 ```bash
-GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local
-```
-
-**Note**: authentication to repox does not work when running locally. You have to override the hostRules in your renovate config:
-
-```json
-"hostRules": [
-    {
-        "matchHost": "repox.jfrog.io",
-        "token": "repox-identity-token"
-    }
-]
+GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local --secrets '{"REPOX_TOKEN": "${REPOX_TOKEN}"}'
 ```

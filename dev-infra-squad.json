@@ -40,6 +40,16 @@
             ]
         }
     ],
+    "customDatasources": {
+        "mend-linux": {
+            "defaultRegistryUrlTemplate": "https://repox.jfrog.io/artifactory/internal-binaries/ci-3rd-party-binaries/mend/linux",
+            "format": "html"
+        },
+        "mend-windows": {
+            "defaultRegistryUrlTemplate": "https://repox.jfrog.io/artifactory/internal-binaries/ci-3rd-party-binaries/mend/windows",
+            "format": "html"
+        }
+    },
     "customManagers": [
         {
             "customType": "regex",
@@ -93,7 +103,8 @@
             ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
-            ]
+            ],
+            "extractVersionTemplate": "^[a-zA-Z-]*_(?<version>.+)"
         },
         {
             "customType": "regex",
