@@ -9,8 +9,8 @@
     ],
     "timezone": "Europe/Paris",
     "schedule": [
-        "after 8am every weekday",
-        "before 5pm every weekday"
+        "after 7am every weekday",
+        "before 8pm every weekday"
     ],
     "enabledManagers": [
         "github-actions",
