@@ -38,6 +38,15 @@
             "addLabels": [
                 "golden-ami"
             ]
+        },
+        {
+            "groupName": "GitHub actions updates",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "groupSlug": "github-actions",
+            "separateMinorPatch": false,
+            "automerge": true
         }
     ],
     "customDatasources": {
