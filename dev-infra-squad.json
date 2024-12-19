@@ -112,6 +112,15 @@
             ],
             "matchStrings": [
                 "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
+            ]
+        },
+        {
+            "customType": "regex",
+            "fileMatch": [
+                ".*\\.?Dockerfile"
+            ],
+            "matchStrings": [
+                "datasource=(?<datasource>mend-.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
             ],
             "extractVersionTemplate": "^[a-zA-Z-]*_(?<version>.+)"
         },
