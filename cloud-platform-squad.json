@@ -1,0 +1,57 @@
+{
+    "extends": [
+        "github>SonarSource/renovate-config"
+    ],
+    "schedule": [
+        "* 9-11 * * 1"
+    ],
+    "automerge": true,
+    "packageRules": [
+        {
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch",
+            "lockFileMaintenance": {
+                "enabled": true
+            },
+            "matchPackageNames": [
+                "*"
+            ],
+            "matchUpdateTypes": [
+                "patch",
+                "minor"
+            ]
+        },
+        {
+            "matchDatasources": [
+                "pypi"
+            ],
+            "enabled": false
+        },
+        {
+            "matchUpdateTypes": [
+                "major",
+                "pin",
+                "pinDigest",
+                "digest",
+                "rollback",
+                "bump",
+                "replacement"
+            ],
+            "enabled": false
+        }
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "datasourceTemplate": "maven",
+            "depNameTemplate": "micronaut",
+            "packageNameTemplate": "io.micronaut.platform:micronaut-platform",
+            "fileMatch": [
+                "(^|/)libs\\.versions.toml"
+            ],
+            "matchStrings": [
+                "micronaut\\s*=\\s*\"(?<currentValue>[\\w+\\.\\-]*)\""
+            ]
+        }
+    ]
+}
