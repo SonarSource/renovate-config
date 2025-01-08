@@ -3,7 +3,7 @@
         "github>SonarSource/renovate-config"
     ],
     "schedule": [
-        "* 9-11 * * 3"
+        "* 9-11 * * 4"
     ],
     "automerge": true,
     "packageRules": [
