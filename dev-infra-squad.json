@@ -47,6 +47,16 @@
             "groupSlug": "github-actions",
             "separateMinorPatch": false,
             "automerge": true
+        },
+        {
+            "groupName": "Python dependencies updates",
+            "matchManagers": [
+                "poetry",
+                "pipenv"
+            ],
+            "groupSlug": "python-deps",
+            "separateMinorPatch": false,
+            "automerge": true
         }
     ],
     "customDatasources": {
