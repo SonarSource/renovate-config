@@ -59,6 +59,13 @@
             "automerge": true
         }
     ],
+    "vulnerabilityAlerts": {
+        "enabled": true,
+        "labels": [
+            "security"
+        ]
+    },
+    "osvVulnerabilityAlerts": true,
     "customDatasources": {
         "mend-linux": {
             "defaultRegistryUrlTemplate": "https://repox.jfrog.io/artifactory/internal-binaries/ci-3rd-party-binaries/mend/linux",
