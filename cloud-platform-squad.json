@@ -5,7 +5,7 @@
     "schedule": [
         "* 9-11 * * 4"
     ],
-    "automerge": true,
+    "automerge": false,
     "packageRules": [
         {
             "groupName": "all non-major dependencies",
