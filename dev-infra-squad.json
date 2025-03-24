@@ -46,7 +46,7 @@
             ],
             "groupSlug": "github-actions",
             "separateMinorPatch": false,
-            "automerge": true
+            "automerge": false
         },
         {
             "groupName": "Python dependencies updates",
@@ -56,7 +56,7 @@
             ],
             "groupSlug": "python-deps",
             "separateMinorPatch": false,
-            "automerge": true
+            "automerge": false
         }
     ],
     "vulnerabilityAlerts": {
