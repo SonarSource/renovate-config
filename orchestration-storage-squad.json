@@ -1,0 +1,42 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config"
+    ],
+    "timezone": "America/Chicago",
+    "schedule": [
+        "* 0-5 * * 1-5"
+    ],
+    "draftPR": true,
+    "automerge": false,
+    "packageRules": [
+        {
+            "matchUpdateTypes": [
+                "minor",
+                "major"
+            ],
+            "minimumReleaseAge": "5 days"
+        },
+        {
+            "groupName": "all dependencies",
+            "groupSlug": "all-deps",
+            "matchPackagePatterns": [
+                "*"
+            ]
+        },
+        {
+            "groupName": "dev dependencies",
+            "groupSlug": "dev-deps",
+            "matchDepTypes": [
+                "devDependencies"
+            ]
+        },
+        {
+            "groupName": "production dependencies",
+            "groupSlug": "prod-deps",
+            "matchDepTypes": [
+                "dependencies"
+            ]
+        }
+    ]
+}
