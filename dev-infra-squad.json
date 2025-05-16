@@ -21,6 +21,7 @@
         "pipenv",
         "terraform"
     ],
+    "dependencyDashboard": true,
     "configMigration": true,
     "addLabels": [
         "dependencies"
