@@ -3,6 +3,7 @@
     "extends": [
         "github>SonarSource/renovate-config",
         "config:best-practices",
+        "group:allNonMajor"
         ":timezone(CET)"
     ],
     "enabledManagers": [
