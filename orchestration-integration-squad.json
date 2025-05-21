@@ -28,20 +28,36 @@
             "minimumReleaseAge": "5 days"
         },
         {
-            "matchManagers": ["gradle", "gradle-wrapper"],
-            "matchUpdateTypes": ["minor", "patch"],
+            "matchManagers": [
+                "gradle",
+                "gradle-wrapper"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
             "groupName": "Non-major Java/Gradle dependencies",
             "prHeader": "Update non-major Java/Gradle dependencies"
         },
         {
-            "matchManagers": ["npm"],
-            "matchUpdateTypes": ["minor", "patch"],
+            "matchManagers": [
+                "npm"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
             "groupName": "Non-major JavaScript dependencies",
             "prHeader": "Update non-major JavaScript dependencies"
         },
         {
-            "matchManagers": ["poetry"],
-            "matchUpdateTypes": ["minor", "patch"],
+            "matchManagers": [
+                "poetry"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
             "groupName": "Non-major Python/Poetry dependencies",
             "prHeader": "Update non-major Python/Poetry dependencies"
         },
