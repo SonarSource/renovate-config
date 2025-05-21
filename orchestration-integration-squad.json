@@ -3,7 +3,6 @@
     "extends": [
         "github>SonarSource/renovate-config",
         "config:best-practices",
-        "group:allNonMajor",
         ":timezone(CET)"
     ],
     "enabledManagers": [
@@ -27,6 +26,24 @@
                 "major"
             ],
             "minimumReleaseAge": "5 days"
+        },
+        {
+            "matchManagers": ["gradle", "gradle-wrapper"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "groupName": "Non-major Java/Gradle dependencies",
+            "prHeader": "Update non-major Java/Gradle dependencies"
+        },
+        {
+            "matchManagers": ["npm"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "groupName": "Non-major JavaScript dependencies",
+            "prHeader": "Update non-major JavaScript dependencies"
+        },
+        {
+            "matchManagers": ["poetry"],
+            "matchUpdateTypes": ["minor", "patch"],
+            "groupName": "Non-major Python/Poetry dependencies",
+            "prHeader": "Update non-major Python/Poetry dependencies"
         },
         {
             "matchFileNames": [
