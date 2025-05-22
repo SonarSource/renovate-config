@@ -15,7 +15,7 @@
         "poetry"
     ],
     "schedule": [
-        "* 9-11 * * 1-5"
+        "0 9 * * 1"
     ],
     "automerge": false,
     "packageRules": [
