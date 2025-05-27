@@ -112,6 +112,20 @@ Make changes in your local `.github/renovate.json` file. You might want to refer
 ```json
     "extends": ["github>SonarSource/renovate-config:dev-infra-squad#feat/BUILD-1234"]
 ```
+you also need to add a hostrule for api.github.com
+
+```json
+"hostRules": [
+    {
+      "matchHost": "repox.jfrog.io",
+      "token": "{{ secrets.REPOX_TOKEN }}"
+    },
+    {
+      "matchHost": "api.github.com",
+      "token": "{{ secrets.GITHUB_TOKEN }}"
+    }
+  ]
+```
 
 
 then run Renovate locally:
