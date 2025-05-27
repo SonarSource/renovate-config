@@ -131,5 +131,5 @@ you also need to add a hostrule for api.github.com
 then run Renovate locally:
 
 ```bash
-GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local --secrets '{"REPOX_TOKEN": "${REPOX_TOKEN}"}'
+GITHUB_COM_TOKEN=$(gh auth token) LOG_LEVEL=debug npx -- renovate --platform=local --secrets '{"REPOX_TOKEN": "${REPOX_TOKEN}","GITHUB_TOKEN": "${GITHUB_COM_TOKEN}"}'
 ```
