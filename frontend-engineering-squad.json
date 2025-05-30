@@ -69,7 +69,11 @@
         {
             "description": "Group all tests related dependencies in the same PR",
             "extends": [
+                "monorepo:playwright",
                 "packages:jsTest"
+            ],
+            "matchPackageNames": [
+                "msw"
             ],
             "groupName": "tests dependencies",
             "groupSlug": "tests"
