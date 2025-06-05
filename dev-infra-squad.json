@@ -8,6 +8,7 @@
         "docker:pinDigests"
     ],
     "timezone": "Europe/Paris",
+    "rebaseWhen": "never",
     "schedule": [
         "after 7am every weekday",
         "before 8pm every weekday"
