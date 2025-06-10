@@ -125,12 +125,13 @@
         },
         {
             "customType": "regex",
+            "comment": "Match legacy depName and new packageName parameters",
             "fileMatch": [
                 ".*\\.sh$",
                 ".*\\.?Dockerfile"
             ],
             "matchStrings": [
-                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
+                "datasource=(?<datasource>\\S+) *(?:depName=(?<depName>\\S+)|packageName=(?<packageName>\\S+))?.*?\\n[ A-Z_]*=(?<currentValue>.*)"
             ]
         },
         {
@@ -139,7 +140,7 @@
                 ".*\\.?Dockerfile"
             ],
             "matchStrings": [
-                "datasource=(?<datasource>mend-.*?) depName=(?<depName>.*?)\\n[ A-Z_]*=(?<currentValue>.*)"
+                "datasource=(?<datasource>mend-\\S+) depName=(?<depName>\\S+).*?\\n[ A-Z_]*=(?<currentValue>.*)"
             ],
             "extractVersionTemplate": "^[a-zA-Z-]*_(?<version>.+)"
         },
