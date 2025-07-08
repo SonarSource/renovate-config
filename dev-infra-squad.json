@@ -42,7 +42,7 @@
             ]
         },
         {
-            "groupName": "GitHub actions updates",
+            "groupName": "GitHub actions",
             "matchManagers": [
                 "github-actions"
             ],
@@ -51,7 +51,7 @@
             "automerge": false
         },
         {
-            "groupName": "Python dependencies updates",
+            "groupName": "Python dependencies",
             "matchManagers": [
                 "poetry",
                 "pipenv"
