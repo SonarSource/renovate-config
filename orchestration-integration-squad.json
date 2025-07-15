@@ -43,12 +43,8 @@
             "matchManagers": [
                 "npm"
             ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch"
-            ],
-            "groupName": "Non-major JavaScript dependencies",
-            "prHeader": "Update non-major JavaScript dependencies"
+            "groupName": "NPM dependencies",
+            "prHeader": "Update NPM dependencies"
         },
         {
             "matchManagers": [
