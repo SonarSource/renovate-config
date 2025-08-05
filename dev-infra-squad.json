@@ -16,6 +16,7 @@
     "enabledManagers": [
         "github-actions",
         "custom.regex",
+        "dockerfile",
         "maven",
         "npm",
         "poetry",
@@ -153,6 +154,17 @@
                 "image: (?<depName>ghcr\\.io.*?)(@(?<currentDigest>sha256:[a-f0-9]{64}) # |:)(?<currentValue>v?[.\\d]+)"
             ],
             "datasourceTemplate": "docker"
+        },
+        {
+            "customType": "regex",
+            "fileMatch": [
+                "^infra/applications/github-runners/values/.*\\.ya?ml$"
+            ],
+            "matchStrings": [
+                "RunnerImage: \"(?<depName>275878209202\\.dkr\\.ecr\\.eu-central-1\\.amazonaws\\.com/base):(?<currentValue>[0-9]{14})\""
+            ],
+            "datasourceTemplate": "docker",
+            "versioningTemplate": "docker"
         }
     ]
 }
