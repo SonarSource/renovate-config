@@ -1,0 +1,84 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config",
+        "config:best-practices",
+        ":timezone(CET)"
+    ],
+    "enabledManagers": [
+        "docker",
+        "docker-compose",
+        "github-actions",
+        "gradle",
+        "gradle-wrapper",
+        "poetry"
+    ],
+    "schedule": [
+        "* 9 * * 1"
+    ],
+    "automerge": false,
+    "packageRules": [
+        {
+            "matchUpdateTypes": [
+                "patch",
+                "minor",
+                "major"
+            ],
+            "minimumReleaseAge": "5 days"
+        },
+        {
+            "matchManagers": [
+                "gradle",
+                "gradle-wrapper"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Java/Gradle dependencies",
+            "prHeader": "Update non-major Java/Gradle dependencies"
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "groupName": "NPM dependencies",
+            "prHeader": "Update NPM dependencies"
+        },
+        {
+            "matchManagers": [
+                "poetry"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Python/Poetry dependencies",
+            "prHeader": "Update non-major Python/Poetry dependencies"
+        },
+        {
+            "matchFileNames": [
+                "**/libs.versions.toml",
+                "**/build.gradle"
+            ],
+            "addLabels": [
+                "gradle"
+            ]
+        },
+        {
+            "matchFileNames": [
+                "**/pyproject.toml"
+            ],
+            "addLabels": [
+                "poetry"
+            ]
+        }
+    ],
+    "vulnerabilityAlerts": {
+        "enabled": true,
+        "labels": [
+            "vulnerability-alert"
+        ]
+    },
+    "osvVulnerabilityAlerts": true
+}
