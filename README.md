@@ -79,6 +79,20 @@ or
   image: ghcr.io/cirruslabs/cirrus-cli@sha256:d3fab24e08d1fd7f85826dc1513186bb5423710fdd497e6d9b85debd08d88b42 # v0.106.0
 ```
 
+#### GitHub Runners ECR Images in YAML files
+
+Replaces Amazon ECR Docker image versions in GitHub runners configuration files located in `infra/applications/github-runners/values/*.yml` and `infra/applications/github-runners/values/*.yaml`.
+
+##### Example
+
+```yaml
+RunnerImage: "275878209202.dkr.ecr.eu-central-1.amazonaws.com/base:20241201123456"
+```
+
+- `depName`: The ECR repository URL (e.g., `275878209202.dkr.ecr.eu-central-1.amazonaws.com/base`)
+- `currentValue`: The current image tag in timestamp format (e.g., `20241201123456`)
+- The manager automatically detects and updates the ECR image tags to their latest available versions
+
 ### [`languages-team`](languages-team.json)
 ```json
   "extends": ["github>SonarSource/renovate-config:languates-team"]
