@@ -81,7 +81,7 @@ or
 
 #### GitHub Runners ECR Images in YAML files
 
-Replaces Amazon ECR Docker image versions in GitHub runners configuration files located in `infra/applications/github-runners/values/*.yml` and `infra/applications/github-runners/values/*.yaml`.
+Replaces Amazon ECR Docker image versions in the GitHub runners configuration file located in `infra/applications/github-runners/values/config.yaml`.
 
 ##### Example
 
