@@ -1,0 +1,60 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config"
+    ],
+    "timezone": "US/Central",
+    "rebaseWhen": "never",
+    "schedule": [
+        "after 7am every weekday",
+        "before 5pm every weekday"
+    ],
+    "enabledManagers": [
+        "maven",
+        "gradle",
+        "gradle-wrapper",
+        "poetry",
+        "pipenv"
+    ],
+    "dependencyDashboard": true,
+    "configMigration": true,
+    "addLabels": [
+        "dependencies"
+    ],
+    "draftPR": true,
+    "packageRules": [
+        {
+            "matchPackageNames": [
+                "org.openapitools:openapi-generator-gradle-plugin"
+            ],
+            "enabled": false
+        },
+        {
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "enabled": false
+        },
+        {
+            "groupName": "Java dependencies",
+            "groupSlug": "java-deps",
+            "matchManagers": [
+                "maven",
+                "gradle",
+                "gradle-wrapper"
+            ],
+            "separateMinorPatch": false,
+            "automerge": false
+        },
+        {
+            "groupName": "Python dependencies",
+            "groupSlug": "python-deps",
+            "matchManagers": [
+                "poetry",
+                "pipenv"
+            ],
+            "separateMinorPatch": false,
+            "automerge": false
+        }
+    ]
+}
