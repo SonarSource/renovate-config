@@ -14,13 +14,14 @@
         "before 8pm every weekday"
     ],
     "enabledManagers": [
-        "github-actions",
         "custom.regex",
         "dockerfile",
+        "github-actions",
+        "helmfile",
         "maven",
         "npm",
-        "poetry",
         "pipenv",
+        "poetry",
         "terraform"
     ],
     "dependencyDashboard": true,
