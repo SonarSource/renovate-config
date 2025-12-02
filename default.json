@@ -40,5 +40,6 @@
             "username": "renovate-read",
             "password": "{{ secrets.REPOX_TOKEN }}"
         }
-    ]
+    ],
+    "npmrc": "registry=https://repox.jfrog.io/artifactory/api/npm/npm"
 }
