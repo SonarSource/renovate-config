@@ -27,6 +27,16 @@
             "registryUrls": [
                 "https://repox.jfrog.io/artifactory/sonarsource-releases"
             ]
+        },
+        {
+            "description": "Group all mise updates together (CalVer, not SemVer)",
+            "matchDepNames": [
+                "mise"
+            ],
+            "separateMajorMinor": false,
+            "separateMinorPatch": false,
+            "branchName": "renovate/mise",
+            "commitMessageExtra": "to {{newVersion}}"
         }
     ],
     "hostRules": [
@@ -39,6 +49,26 @@
             "matchHost": "repox.jfrog.io",
             "username": "renovate-read",
             "password": "{{ secrets.REPOX_TOKEN }}"
+        }
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "description": "Update Mise version in jdx/mise-action. Matches: 'jdx/mise-action@...' followed by 'with:' block containing 'version: <currentValue>'",
+            "managerFilePatterns": [
+                "/(^|/)workflow-templates/.+\\.ya?ml$/",
+                "/(^|/)\\.github/workflows/.+\\.ya?ml$/",
+                "/(^|/)\\.github/actions/.+\\.ya?ml$/",
+                "/(^|/)action\\.ya?ml$/"
+            ],
+            "datasourceTemplate": "github-releases",
+            "packageNameTemplate": "jdx/mise",
+            "depNameTemplate": "mise",
+            "matchStrings": [
+                "jdx/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+(?!-\\s)\\S+:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)"
+            ],
+            "extractVersionTemplate": "^v(?<version>.*)$",
+            "versioningTemplate": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
         }
     ]
 }
