@@ -65,7 +65,7 @@
             "packageNameTemplate": "jdx/mise",
             "depNameTemplate": "mise",
             "matchStrings": [
-                "jdx/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+(?!-\\s)\\S+:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)"
+                "jdx/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)"
             ],
             "extractVersionTemplate": "^v(?<version>.*)$",
             "versioningTemplate": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
