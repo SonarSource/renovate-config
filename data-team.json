@@ -1,0 +1,49 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config:default",
+        ":dependencyDashboard",
+        ":separateMultipleMajorReleases",
+        ":combinePatchMinorReleases",
+        ":approveMajorUpdates",
+        ":renovatePrefix"
+    ],
+    "schedule": [
+        "* 1-9 * * 1"
+    ],
+    "automerge": false,
+    "addLabels": [
+        "renovate-dependencies"
+    ],
+    "vulnerabilityAlerts": {
+        "enabled": true,
+        "labels": [
+            "renovate-vulnerability-alert"
+        ]
+    },
+    "packageRules": [
+        {
+            "description": "Ensure that each project has their own set of dependency updates, split by the parent directory of the package file (`packageFileDir`). Groups will be unaffected.",
+            "matchFileNames": [
+                "**/*"
+            ],
+            "additionalBranchPrefix": "{{#if isGroup }}{{ else }}{{packageFileDir}}/{{/if}}",
+            "commitMessageSuffix": "{{#if isGroup }}{{ else }} ({{packageFileDir}}){{/if}}"
+        },
+        {
+            "description": "Wait for 5 days after a release before updating",
+            "matchUpdateTypes": [
+                "patch",
+                "minor",
+                "major"
+            ],
+            "minimumReleaseAge": "5 days"
+        },
+        {
+            "matchManagers": [
+                "poetry"
+            ],
+            "enabled": false
+        }
+    ]
+}
