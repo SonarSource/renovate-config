@@ -21,13 +21,25 @@
     "addLabels": [
         "dependencies"
     ],
-    "draftPR": true,
+    "draftPR": false,
     "packageRules": [
         {
             "matchPackageNames": [
                 "org.openapitools:openapi-generator-gradle-plugin"
             ],
             "enabled": false
+        },
+        {
+            "matchPackageNames": [
+                "com.sonarsource.sca:metrics"
+            ],
+            "enabled": false
+        },
+        {
+            "matchPackageNames": [
+                "certifi"
+            ],
+            "versioning": "semver"
         },
         {
             "matchUpdateTypes": [
