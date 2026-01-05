@@ -3,3 +3,6 @@
 
 # No review needed for documentation changes
 *.md
+
+# squad configuration files
+organization-reporting-squad.json @sonarsource/orchestration-reporting-squad

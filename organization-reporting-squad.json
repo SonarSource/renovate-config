@@ -25,13 +25,9 @@
     "packageRules": [
         {
             "matchPackageNames": [
-                "org.openapitools:openapi-generator-gradle-plugin"
-            ],
-            "enabled": false
-        },
-        {
-            "matchPackageNames": [
-                "com.sonarsource.sca:metrics"
+                "org.openapitools:openapi-generator-gradle-plugin",
+                "com.sonarsource.sca:metrics",
+                "com.sonarsource.sonarcloud:sonar-server-es"
             ],
             "enabled": false
         },
