@@ -6,8 +6,7 @@
     "timezone": "US/Central",
     "rebaseWhen": "never",
     "schedule": [
-        "after 7am every weekday",
-        "before 5pm every weekday"
+        "* 7-15 * * 1"
     ],
     "enabledManagers": [
         "maven",
@@ -26,7 +25,7 @@
         {
             "matchPackageNames": [
                 "org.openapitools:openapi-generator-gradle-plugin",
-                "com.sonarsource.sca:metrics",
+                "com.sonarsource.sca:*",
                 "com.sonarsource.sonarcloud:sonar-server-es"
             ],
             "enabled": false
