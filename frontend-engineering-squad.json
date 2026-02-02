@@ -45,6 +45,20 @@
             "minimumReleaseAge": "5 days"
         },
         {
+            "description": "Don't pin SonarSource GitHub Actions, let them rely on major versions",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "SonarSource/**"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "rollback"
+            ],
+            "enabled": false
+        },
+        {
             "description": "Group all non-major dependencies in the same PR",
             "groupName": "all non-major dependencies",
             "groupSlug": "all-minor-patch",
@@ -105,6 +119,14 @@
             ],
             "groupName": "vite dependencies",
             "groupSlug": "vite"
+        },
+        {
+            "description": "Group all GitHub Actions in the same PR.",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "groupName": "github actions",
+            "groupSlug": "github-actions"
         },
         {
             "description": "Update Typescript dependency in a separate PR",
