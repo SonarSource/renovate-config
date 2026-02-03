@@ -6,38 +6,59 @@
         "* 9-11 * * 4"
     ],
     "automerge": false,
+    "labels": [
+        "dependency-update"
+    ],
     "packageRules": [
         {
-            "groupName": "all non-major dependencies",
-            "groupSlug": "all-minor-patch",
-            "lockFileMaintenance": {
-                "enabled": true
-            },
-            "matchPackageNames": [
-                "*"
-            ],
             "matchUpdateTypes": [
                 "patch",
-                "minor"
+                "minor",
+                "major"
+            ],
+            "minimumReleaseAge": "5 days"
+        },
+        {
+            "matchFileNames": [
+                "**/libs.versions.toml",
+                "**/build.gradle"
+            ],
+            "addLabels": [
+                "gradle"
             ]
         },
         {
-            "matchDatasources": [
-                "pypi"
+            "matchFileNames": [
+                "**/pyproject.toml"
+            ],
+            "addLabels": [
+                "platform"
+            ]
+        },
+        {
+            "description": "Don't pin SonarSource GitHub Actions, let them rely on major versions",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "SonarSource/**"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "rollback"
             ],
             "enabled": false
         },
         {
-            "matchUpdateTypes": [
-                "major",
-                "pin",
-                "pinDigest",
-                "digest",
-                "rollback",
-                "bump",
-                "replacement"
+            "description": "Group all GitHub Actions in the same PR.",
+            "matchManagers": [
+                "github-actions"
             ],
-            "enabled": false
+            "groupName": "github actions",
+            "groupSlug": "github-actions",
+            "addLabels": [
+                "github-actions"
+            ]
         }
     ],
     "customManagers": [
