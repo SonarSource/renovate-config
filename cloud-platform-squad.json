@@ -29,7 +29,8 @@
         },
         {
             "matchFileNames": [
-                "**/pyproject.toml"
+                "**/pyproject.toml",
+                "**/poetry.lock"
             ],
             "addLabels": [
                 "platform"
