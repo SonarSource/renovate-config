@@ -49,6 +49,12 @@
             "matchHost": "repox.jfrog.io",
             "username": "renovate-read",
             "password": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "hostType": "nuget",
+            "matchHost": "repox.jfrog.io",
+            "username": "renovate-read",
+            "password": "{{ secrets.REPOX_TOKEN }}"
         }
     ],
     "customManagers": [
