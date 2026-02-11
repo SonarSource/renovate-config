@@ -1,0 +1,20 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config"
+    ],
+    "packageRules": [
+        {
+            "description": "Watch master builds from internal repos (SLCORE, SLLS, SLO#, SQVSROS, ...)",
+            "matchDatasources": [
+                "maven"
+            ],
+            "matchPackagePatterns": [
+                "^org\\.sonarsource\\.sonarlint."
+            ],
+            "registryUrls": [
+                "https://repox.jfrog.io/artifactory/sonarsource-builds"
+            ]
+        }
+    ]
+}
