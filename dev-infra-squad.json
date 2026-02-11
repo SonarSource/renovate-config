@@ -166,6 +166,18 @@
             ],
             "datasourceTemplate": "docker",
             "versioningTemplate": "docker"
+        },
+        {
+            "customType": "regex",
+            "description": "Update AMI IDs in Helm gotmpl files",
+            "fileMatch": [
+                "\\.gotmpl$"
+            ],
+            "matchStrings": [
+                "#\\s*(?:renovate:\\s*)?amiFilter=(?<packageName>\\[.*?\\])\\n#\\s*currentImageName=(?<depName>[^\\s]+) [\\d\\-T:.]+Z\\n\\{\\{-\\s*\\$?\\w+\\s*:=\\s*\\\"(?<currentValue>ami-[a-f0-9]+)\\\"\\s*\\}\\}"
+            ],
+            "datasourceTemplate": "aws-machine-image",
+            "versioningTemplate": "aws-machine-image"
         }
     ]
 }
