@@ -45,6 +45,22 @@ amis = {
 - currentImageName: The name of the current image. Managed by renovate.
 - image_id: The ID of the current image. Managed by renovate.
 
+#### AWS Machine Images in Helm gotmpl files
+
+Replaces AMI IDs in Helm `*.gotmpl` files (e.g. Karpenter EC2NodeClass values). Uses the same `aws-machine-image` datasource.
+
+##### Example
+
+```yaml
+# renovate: amiFilter=[{"Name":"image-type","Values":["machine"]},{"Name":"name","Values":["sonar-amazon-eks-node-1-32 *"]},{"Name":"state","Values":["available"]},{"Name":"is-public","Values":["false"]}]
+# currentImageName=sonar-amazon-eks-node-1-32 2026-02-09T14-00-00.000000Z
+{{- $karpenter_ami_id := "ami-0b900a757ae0f2a4c" }}
+```
+
+- Supports both `# amiFilter=` and `# renovate: amiFilter=` prefixes
+- `currentImageName`: Image name and timestamp. Managed by Renovate
+- The Go template variable (`$var := "ami-xxx"`) is automatically updated
+
 #### AWS Machine Images in CDK projects
 
 Replaces version strings in `cdk.context.json` files. Works
