@@ -9,6 +9,7 @@
     "labels": [
         "dependency-update"
     ],
+    "rebaseWhen": "never",
     "packageRules": [
         {
             "matchUpdateTypes": [
