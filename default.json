@@ -4,9 +4,9 @@
         "config:recommended",
         ":timezone(CET)",
         ":disableRateLimiting",
-        ":disableDependencyDashboard",
-        ":rebaseStalePrs"
+        ":disableDependencyDashboard"
     ],
+    "rebaseWhen": "never",
     "packageRules": [
         {
             "matchDepTypes": [
