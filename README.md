@@ -4,6 +4,20 @@
 
 ## Presets
 
+## Rebase policy
+
+The organization defaults to manual rebasing by setting `rebaseWhen` to `never` in the shared `default` preset.
+This avoids large CI spikes when many Renovate PRs are open.
+
+When a Renovate PR must be rebased, do it manually from the Renovate UI:
+
+1. Open [developer.mend.io](https://developer.mend.io/) and log in with GitHub.
+2. Select the `Renovate` app (not `Forking Renovate`).
+3. Open your repository and the target Renovate PR.
+4. Trigger a manual rebase from the UI (Rebase action).
+
+Use manual rebasing only when needed (for example, merge conflicts, outdated base branch, or required checks that need a fresh branch).
+
 ### [`default`](default.json)
 
 ```json
