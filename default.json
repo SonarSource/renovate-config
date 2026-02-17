@@ -17,6 +17,17 @@
             "rollbackPrs": true
         },
         {
+            "description": "Internal SonarSource actions: use tags instead of digest pinning",
+            "matchDepTypes": [
+                "action"
+            ],
+            "matchPackagePatterns": [
+                "^SonarSource/"
+            ],
+            "pinDigests": false,
+            "rollbackPrs": true
+        },
+        {
             "matchDatasources": [
                 "maven"
             ],
