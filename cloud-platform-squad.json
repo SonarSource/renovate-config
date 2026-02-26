@@ -3,7 +3,7 @@
         "github>SonarSource/renovate-config"
     ],
     "schedule": [
-        "* 9-11 * * 4"
+        "* 9-11 * * 0"
     ],
     "automerge": false,
     "labels": [
@@ -20,21 +20,59 @@
             "minimumReleaseAge": "5 days"
         },
         {
+            "description": "Group all patch updates in a single PR",
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "groupName": "all patch updates",
+            "groupSlug": "all-patch-updates"
+        },
+        {
+            "description": "Group all minor updates in a single PR",
+            "matchUpdateTypes": [
+                "minor"
+            ],
+            "groupName": "all minor updates",
+            "groupSlug": "all-minor-updates"
+        },
+        {
+            "description": "Group Gradle updates in a separate PR",
             "matchFileNames": [
                 "**/libs.versions.toml",
                 "**/build.gradle"
             ],
             "addLabels": [
                 "gradle"
-            ]
+            ],
+            "groupName": "gradle updates",
+            "groupSlug": "gradle-updates"
         },
         {
-            "matchFileNames": [
-                "**/pyproject.toml",
-                "**/poetry.lock"
+            "description": "Group Python/poetry dependency updates in a separate PR",
+            "matchManagers": [
+                "poetry",
+                "pep621"
             ],
+            "enabled": true,
             "addLabels": [
                 "platform"
+            ],
+            "groupName": "python updates",
+            "groupSlug": "python-updates"
+        },
+        {
+            "description": "Python interpreter version stays in a separate PR",
+            "matchManagers": [
+                "poetry",
+                "pep621"
+            ],
+            "matchPackageNames": [
+                "python"
+            ],
+            "groupName": "python version update",
+            "groupSlug": "python-version-update",
+            "addLabels": [
+                "python-version-update"
             ]
         },
         {
