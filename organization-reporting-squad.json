@@ -27,7 +27,8 @@
                 "org.openapitools:openapi-generator-gradle-plugin",
                 "com.sonarsource.sca:*",
                 "com.sonarsource.sonarcloud*",
-                "org.sonarsource.api.plugin:sonar-plugin-api"
+                "org.sonarsource.api.plugin:sonar-plugin-api",
+                "com.sonarsource.pdfreport:*"
             ],
             "enabled": false
         },
