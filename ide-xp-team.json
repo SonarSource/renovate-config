@@ -38,6 +38,11 @@
             "minimumReleaseAge": "5 days"
         },
         {
+            "description": "Apply security upgrades immediately, without waiting",
+            "isVulnerabilityAlert": true,
+            "minimumReleaseAge": "0 days"
+        },
+        {
             "description": "Group all minor and patch updates in a single PR to reduce noise",
             "matchUpdateTypes": [
                 "patch",
