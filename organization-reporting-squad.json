@@ -28,7 +28,9 @@
                 "com.sonarsource.sca:*",
                 "com.sonarsource.sonarcloud*",
                 "org.sonarsource.api.plugin:sonar-plugin-api",
-                "com.sonarsource.pdfreport:*"
+                "com.sonarsource.pdfreport:*",
+                "org.sonarsource.compliancereports:*",
+                "com.sonarsource.sonarcloud:compliance-reports-metadata"
             ],
             "enabled": false
         },
