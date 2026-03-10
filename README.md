@@ -28,7 +28,7 @@ Use manual rebasing only when needed (for example, merge conflicts, outdated bas
 #### Dependency grouping
 
 To reduce Renovate PR volume, the shared `default` preset groups updates by manager using `packageRules`.
-Manager-based groups currently include: `github-actions`, `maven`, `gradle` (including `gradle-wrapper`), `npm`, `poetry`, `pipenv`, `pip_requirements`, `nuget`, `dockerfile`, and `terraform`.
+Manager-based groups currently include: `github-actions`, `maven`, `gradle` (including `gradle-wrapper`), `npm`, `poetry`, `pipenv`, `pip_requirements`, `nuget`, `terraform`, `helmfile`, and `mise`.
 The preset also includes an additional non-manager grouping rule that groups all `mise` updates together.
 
 #### Authentication

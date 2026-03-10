@@ -82,20 +82,28 @@
             "groupSlug": "nuget-dependencies"
         },
         {
-            "description": "Group Dockerfile updates",
-            "matchManagers": [
-                "dockerfile"
-            ],
-            "groupName": "Dockerfile dependencies",
-            "groupSlug": "dockerfile-dependencies"
-        },
-        {
             "description": "Group Terraform updates",
             "matchManagers": [
                 "terraform"
             ],
             "groupName": "Terraform dependencies",
             "groupSlug": "terraform-dependencies"
+        },
+        {
+            "description": "Group Helmfile updates",
+            "matchManagers": [
+                "helmfile"
+            ],
+            "groupName": "Helmfile dependencies",
+            "groupSlug": "helmfile-dependencies"
+        },
+        {
+            "description": "Group Mise tool updates",
+            "matchManagers": [
+                "mise"
+            ],
+            "groupName": "Mise tool dependencies",
+            "groupSlug": "mise-tool-dependencies"
         },
         {
             "matchDatasources": [
