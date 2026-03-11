@@ -18,11 +18,20 @@ When a Renovate PR must be rebased, do it manually from the Renovate UI:
 
 Use manual rebasing only when needed (for example, merge conflicts, outdated base branch, or required checks that need a fresh branch).
 
+
 ### [`default`](default.json)
 
 ```json
   "extends": ["github>SonarSource/renovate-config"]
 ```
+
+#### Dependency grouping
+
+To reduce Renovate PR volume, the shared `default` preset groups updates by manager using `packageRules`.
+Manager-based groups currently include: `github-actions`, `maven`, `gradle` (including `gradle-wrapper`), `npm`, `poetry`, `pipenv`, `pip_requirements`, `nuget`, `terraform`, `helmfile`, and `mise`.
+The preset also includes an additional non-manager grouping rule that groups all `mise` updates together.
+
+#### Authentication
 
 Provides authentication credentials to https://repox.jfrog.io. The following package managers were tested for compatibility: `npm`, `maven`, `gradle`, `pipenv`, `poetry`, and `nuget`.
 
@@ -125,7 +134,7 @@ RunnerImage: "275878209202.dkr.ecr.eu-central-1.amazonaws.com/base:2024120112345
 
 ### [`languages-team`](languages-team.json)
 ```json
-  "extends": ["github>SonarSource/renovate-config:languates-team"]
+  "extends": ["github>SonarSource/renovate-config:languages-team"]
 ```
 
 Enables the `custom` manager for replacing version strings in `snapshot-generation.sh`.

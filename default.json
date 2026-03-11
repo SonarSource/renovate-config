@@ -17,6 +17,95 @@
             "rollbackPrs": true
         },
         {
+            "description": "Group GitHub Actions updates",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "groupName": "GitHub Actions dependencies",
+            "groupSlug": "github-actions-dependencies"
+        },
+        {
+            "description": "Group Maven updates",
+            "matchManagers": [
+                "maven"
+            ],
+            "groupName": "Maven dependencies",
+            "groupSlug": "maven-dependencies"
+        },
+        {
+            "description": "Group Gradle updates",
+            "matchManagers": [
+                "gradle",
+                "gradle-wrapper"
+            ],
+            "groupName": "Gradle dependencies",
+            "groupSlug": "gradle-dependencies"
+        },
+        {
+            "description": "Group npm updates",
+            "matchManagers": [
+                "npm"
+            ],
+            "groupName": "npm dependencies",
+            "groupSlug": "npm-dependencies"
+        },
+        {
+            "description": "Group Poetry updates",
+            "matchManagers": [
+                "poetry"
+            ],
+            "groupName": "Poetry dependencies",
+            "groupSlug": "poetry-dependencies"
+        },
+        {
+            "description": "Group Pipenv updates",
+            "matchManagers": [
+                "pipenv"
+            ],
+            "groupName": "Pipenv dependencies",
+            "groupSlug": "pipenv-dependencies"
+        },
+        {
+            "description": "Group pip requirements updates",
+            "matchManagers": [
+                "pip_requirements"
+            ],
+            "groupName": "pip requirements dependencies",
+            "groupSlug": "pip-requirements-dependencies"
+        },
+        {
+            "description": "Group NuGet updates",
+            "matchManagers": [
+                "nuget"
+            ],
+            "groupName": "NuGet dependencies",
+            "groupSlug": "nuget-dependencies"
+        },
+        {
+            "description": "Group Terraform updates",
+            "matchManagers": [
+                "terraform"
+            ],
+            "groupName": "Terraform dependencies",
+            "groupSlug": "terraform-dependencies"
+        },
+        {
+            "description": "Group Helmfile updates",
+            "matchManagers": [
+                "helmfile"
+            ],
+            "groupName": "Helmfile dependencies",
+            "groupSlug": "helmfile-dependencies"
+        },
+        {
+            "description": "Group Mise tool updates",
+            "matchManagers": [
+                "mise"
+            ],
+            "groupName": "Mise tool dependencies",
+            "groupSlug": "mise-tool-dependencies"
+        },
+        {
             "matchDatasources": [
                 "maven"
             ],
