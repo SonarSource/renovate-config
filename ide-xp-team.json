@@ -5,7 +5,7 @@
     ],
     "schedule": [
         "after 7am every weekday",
-        "before 8pm every weekday"
+        "before 7pm every weekday"
     ],
     "dependencyDashboard": true,
     "vulnerabilityAlerts": {
@@ -17,36 +17,50 @@
     "osvVulnerabilityAlerts": true,
     "packageRules": [
         {
-            "description": "Watch master builds from internal repos (SLCORE, SLLS, SLO#, SQVSROS, ...)",
+            "description": "Group all SonarLint Core (SLCORE) packages in a dedicated PR (released versions only)",
             "matchDatasources": [
                 "maven"
             ],
             "matchPackagePatterns": [
-                "^org\\.sonarsource\\.sonarlint."
+                "^org\\.sonarsource\\.sonarlint\\.core:"
             ],
-            "registryUrls": [
-                "https://repox.jfrog.io/artifactory/sonarsource-builds"
-            ]
-        },
-        {
-            "description": "Wait for 5 days after a release before updating to avoid early bugs",
             "matchUpdateTypes": [
                 "patch",
                 "minor",
                 "major"
             ],
-            "minimumReleaseAge": "5 days"
+            "groupName": "SonarLint Core dependencies",
+            "groupSlug": "sonarlint-core-dependencies"
         },
         {
-            "description": "Apply security upgrades immediately, without waiting",
-            "isVulnerabilityAlert": true,
-            "minimumReleaseAge": "0 days"
+            "description": "Group all analyzer packages in a dedicated PR (excludes SLCORE)",
+            "matchDatasources": [
+                "maven"
+            ],
+            "matchPackagePatterns": [
+                "^org\\.sonarsource\\.",
+                "^com\\.sonarsource\\."
+            ],
+            "excludePackagePatterns": [
+                "^org\\.sonarsource\\.sonarlint\\.core:"
+            ],
+            "matchUpdateTypes": [
+                "patch",
+                "minor",
+                "major"
+            ],
+            "groupName": "analyzer dependencies",
+            "groupSlug": "analyzer-dependencies"
         },
         {
-            "description": "Group all minor and patch updates in a single PR to reduce noise",
+            "description": "Group all minor and patch updates in a single PR to reduce noise (excludes analyzers and SLCORE)",
             "matchUpdateTypes": [
                 "patch",
                 "minor"
+            ],
+            "excludePackagePatterns": [
+                "^org\\.sonarsource\\.",
+                "^com\\.sonarsource\\."
             ],
             "groupName": "all minor and patch updates",
             "groupSlug": "all-minor-patch"
