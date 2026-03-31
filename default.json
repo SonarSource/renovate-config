@@ -3,9 +3,11 @@
     "extends": [
         "config:recommended",
         ":timezone(CET)",
-        ":disableRateLimiting",
-        ":disableDependencyDashboard"
+        ":disableRateLimiting"
     ],
+    "minimumReleaseAge": "5 days",
+    "minimumReleaseAgeBehaviour": "timestamp-optional",
+    "prCreation": "not-pending",
     "rebaseWhen": "never",
     "packageRules": [
         {
