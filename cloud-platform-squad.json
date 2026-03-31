@@ -13,14 +13,6 @@
     "rebaseWhen": "never",
     "packageRules": [
         {
-            "matchUpdateTypes": [
-                "patch",
-                "minor",
-                "major"
-            ],
-            "minimumReleaseAge": "5 days"
-        },
-        {
             "description": "Group all patch updates in a single PR",
             "matchUpdateTypes": [
                 "patch"

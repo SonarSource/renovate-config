@@ -20,14 +20,6 @@
     "automerge": false,
     "packageRules": [
         {
-            "matchUpdateTypes": [
-                "patch",
-                "minor",
-                "major"
-            ],
-            "minimumReleaseAge": "5 days"
-        },
-        {
             "matchManagers": [
                 "gradle",
                 "gradle-wrapper"
