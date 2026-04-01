@@ -109,6 +109,9 @@
         },
         {
             "description": "Skip minimumReleaseAge for internal SonarSource packages (trusted, published by us)",
+            "matchDatasources": [
+                "maven"
+            ],
             "matchPackagePatterns": [
                 "^org.sonarsource",
                 "^com.sonarsource"
