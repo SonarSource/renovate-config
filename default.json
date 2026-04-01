@@ -6,7 +6,7 @@
         ":disableRateLimiting"
     ],
     "minimumReleaseAge": "5 days",
-    "minimumReleaseAgeBehaviour": "timestamp-optional",
+    "minimumReleaseAgeBehaviour": "timestamp-required",
     "prCreation": "not-pending",
     "rebaseWhen": "never",
     "packageRules": [
@@ -106,6 +106,24 @@
             ],
             "groupName": "Mise tool dependencies",
             "groupSlug": "mise-tool-dependencies"
+        },
+        {
+            "description": "Skip minimumReleaseAge for internal SonarSource packages (trusted, published by us)",
+            "matchPackagePatterns": [
+                "^org.sonarsource",
+                "^com.sonarsource"
+            ],
+            "minimumReleaseAge": "0 days"
+        },
+        {
+            "description": "Skip minimumReleaseAge for internal SonarSource GitHub Actions",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackagePatterns": [
+                "^SonarSource/"
+            ],
+            "minimumReleaseAge": "0 days"
         },
         {
             "matchDatasources": [

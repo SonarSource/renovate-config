@@ -34,26 +34,7 @@
             "^(github-action)(\\/[^/]+)?\\/action\\.ya?ml$"
         ]
     },
-    "minimumReleaseAgeBehaviour": "timestamp-required",
     "packageRules": [
-        {
-            "description": "Skip minimumReleaseAge for internal SonarSource packages (trusted, published by us)",
-            "matchPackagePatterns": [
-                "^org.sonarsource",
-                "^com.sonarsource"
-            ],
-            "minimumReleaseAge": "0 days"
-        },
-        {
-            "description": "Skip minimumReleaseAge for internal SonarSource GitHub Actions",
-            "matchManagers": [
-                "github-actions"
-            ],
-            "matchPackagePatterns": [
-                "^SonarSource/"
-            ],
-            "minimumReleaseAge": "0 days"
-        },
         {
             "matchPackagePatterns": [
                 ".*sonar-(ubuntu|windowsserver|amazon|centos)-.*"
