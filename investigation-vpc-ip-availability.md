@@ -1,11 +1,13 @@
 # Investigation: [GH Runner Infra] VPC IP Address Availability - Prod
 
-**Date:** 2026-04-08  
-**Monitor ID:** 102480265  
-**Status:** ALERT (P2)  
-**Service:** Github Action Runners Infra  
-**Owner:** development-infra-squad  
-**Runbook:** https://xtranet-sonarsource.atlassian.net/wiki/spaces/Platform/pages/4992335882
+| Field | Value |
+|---|---|
+| **Date** | 2026-04-08 |
+| **Monitor ID** | 102480265 |
+| **Status** | ALERT (P2) |
+| **Service** | Github Action Runners Infra |
+| **Owner** | development-infra-squad |
+| **Runbook** | https://xtranet-sonarsource.atlassian.net/wiki/spaces/Platform/pages/4992335882 |
 
 ## Summary
 
