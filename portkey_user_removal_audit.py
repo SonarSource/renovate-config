@@ -27,10 +27,13 @@ if not API_KEY:
 BASE_URL = "https://api.portkey.ai/v1"
 ORG_ID = "d1243619-42c1-49ed-98d8-3acb99d8c21b"
 HEADERS = {"x-portkey-api-key": API_KEY}
+ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
+SCIM_PATH = "/scim/"
+USERS_PATH = "/users/"
 
 now = datetime.now(timezone.utc)
-start_time = (now - timedelta(hours=24)).strftime("%Y-%m-%dT%H:%M:%SZ")
-end_time = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+start_time = (now - timedelta(hours=24)).strftime(ISO8601_FMT)
+end_time = now.strftime(ISO8601_FMT)
 
 
 def fetch_page(page=0, page_size=100):
@@ -53,6 +56,7 @@ def fetch_page(page=0, page_size=100):
         else:
             print(f"ERROR: HTTP {resp.status_code} after 4 attempts: {resp.text}", file=sys.stderr)
             sys.exit(1)
+    return None
 
 
 def fetch_all_logs():
@@ -137,19 +141,22 @@ def main():
         lu = uri.lower()
         methods[method] = methods.get(method, 0) + 1
 
+        is_scim = SCIM_PATH in lu
+        is_user_path = USERS_PATH in lu
+
         # 1) SCIM PUT with active=false
-        if method == "PUT" and "/scim/" in lu and "/users/" in lu:
+        if method == "PUT" and is_scim and is_user_path:
             body = parse_body(record.get("request_body"))
             if body.get("active") is False:
                 name, email, uname = scim_user_info(body)
                 removals.append(make_removal("SCIM Deactivation (active=false)", record, name, email, uname))
 
         # 2) SCIM DELETE /Users/
-        elif method == "DELETE" and "/scim/" in lu and "/users/" in lu:
+        elif method == "DELETE" and is_scim and is_user_path:
             removals.append(make_removal("SCIM User Deletion (DELETE)", record))
 
         # 3) Direct user deletion (non-SCIM)
-        elif method == "DELETE" and "/users" in lu and "scim" not in lu:
+        elif method == "DELETE" and is_user_path and not is_scim:
             body = parse_body(record.get("request_body"))
             removals.append(make_removal(
                 "Direct User Deletion", record,
@@ -168,7 +175,7 @@ def main():
             ))
 
         # 5) SCIM PATCH to deactivate
-        elif method == "PATCH" and "/scim/" in lu and "/users/" in lu:
+        elif method == "PATCH" and is_scim and is_user_path:
             body = parse_body(record.get("request_body"))
             ops = body.get("Operations", body.get("operations", []))
             if isinstance(ops, list):
@@ -234,7 +241,7 @@ def main():
     report = {
         "audit_window": {"start": start_time, "end": end_time},
         "organisation_id": ORG_ID,
-        "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": now.strftime(ISO8601_FMT),
         "total_records_scanned": len(all_records),
         "summary": {
             "total_successful_removals": len(ok),
