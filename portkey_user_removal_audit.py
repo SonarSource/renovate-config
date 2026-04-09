@@ -25,12 +25,14 @@ if not API_KEY:
     sys.exit(1)
 
 BASE_URL = "https://api.portkey.ai/v1"
-ORG_ID = "d1243619-42c1-49ed-98d8-3acb99d8c21b"
+ORG_ID = os.environ.get("PORTKEY_ORG_ID", "d1243619-42c1-49ed-98d8-3acb99d8c21b")
 HEADERS = {"x-portkey-api-key": API_KEY}
 ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
 SCIM_PATH = "/scim/"
 USERS_PATH = "/users/"
 REQUEST_BODY_KEY = "request_body"
+UNKNOWN_USER = "Unknown"
+METHOD_DELETE = "DELETE"
 
 now = datetime.now(timezone.utc)
 start_time = (now - timedelta(hours=24)).strftime(ISO8601_FMT)
@@ -96,7 +98,7 @@ def parse_body(raw):
 
 def scim_user_info(body):
     """Extract user display name and email from a SCIM request body."""
-    name = body.get("displayName", "Unknown")
+    name = body.get("displayName", UNKNOWN_USER)
     emails = body.get("emails", [])
     email = next((e["value"] for e in emails if e.get("primary")), "")
     if not email and emails:
@@ -105,7 +107,7 @@ def scim_user_info(body):
     return name, email, username
 
 
-def make_removal(rtype, record, name="Unknown", email="", username=""):
+def make_removal(rtype, record, name=UNKNOWN_USER, email="", username=""):
     return {
         "type": rtype,
         "timestamp": record["timestamp"],
@@ -153,25 +155,25 @@ def main():
                 removals.append(make_removal("SCIM Deactivation (active=false)", record, name, email, uname))
 
         # 2) SCIM DELETE /Users/
-        elif method == "DELETE" and is_scim and is_user_path:
+        elif method == METHOD_DELETE and is_scim and is_user_path:
             removals.append(make_removal("SCIM User Deletion (DELETE)", record))
 
         # 3) Direct user deletion (non-SCIM)
-        elif method == "DELETE" and is_user_path and not is_scim:
+        elif method == METHOD_DELETE and is_user_path and not is_scim:
             body = parse_body(record.get(REQUEST_BODY_KEY))
             removals.append(make_removal(
                 "Direct User Deletion", record,
-                body.get("displayName", body.get("name", "Unknown")),
+                body.get("displayName", body.get("name", UNKNOWN_USER)),
                 body.get("email", ""),
                 body.get("userName", ""),
             ))
 
         # 4) Workspace member removal
-        elif method == "DELETE" and "/member" in lu:
+        elif method == METHOD_DELETE and "/member" in lu:
             body = parse_body(record.get(REQUEST_BODY_KEY))
             removals.append(make_removal(
                 "Workspace Member Removal", record,
-                body.get("name", "Unknown"),
+                body.get("name", UNKNOWN_USER),
                 body.get("email", ""),
             ))
 
