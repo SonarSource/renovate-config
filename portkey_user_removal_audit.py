@@ -14,6 +14,7 @@ User removals can happen via:
 import json
 import os
 import sys
+import tempfile
 import time
 from datetime import datetime, timedelta, timezone
 
@@ -280,7 +281,7 @@ def write_report(ok, fail, total_scanned):
         "successful_removals": ok,
         "failed_removals": fail,
     }
-    report_dir = os.environ.get("REPORT_DIR", "/tmp")
+    report_dir = os.environ.get("REPORT_DIR") or tempfile.mkdtemp()
     path = os.path.join(report_dir, "portkey_user_removal_report.json")
     with open(path, "w") as f:
         json.dump(report, f, indent=2)
