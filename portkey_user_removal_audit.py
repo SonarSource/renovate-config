@@ -24,8 +24,12 @@ if not API_KEY:
     print("ERROR: PORTKEY_ADMIN_API_KEY environment variable not set", file=sys.stderr)
     sys.exit(1)
 
+ORG_ID = os.environ.get("PORTKEY_ORG_ID")
+if not ORG_ID:
+    print("ERROR: PORTKEY_ORG_ID environment variable not set", file=sys.stderr)
+    sys.exit(1)
+
 BASE_URL = "https://api.portkey.ai/v1"
-ORG_ID = os.environ.get("PORTKEY_ORG_ID", "d1243619-42c1-49ed-98d8-3acb99d8c21b")
 HEADERS = {"x-portkey-api-key": API_KEY}
 ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
 SCIM_PATH = "/scim/"
@@ -108,6 +112,7 @@ def scim_user_info(body):
 
 
 def make_removal(rtype, record, name=UNKNOWN_USER, email="", username=""):
+    """Build a removal event dict from an audit log record."""
     return {
         "type": rtype,
         "timestamp": record["timestamp"],
@@ -124,76 +129,89 @@ def make_removal(rtype, record, name=UNKNOWN_USER, email="", username=""):
     }
 
 
-def main():
-    print("=" * 80)
-    print("PORTKEY USER REMOVAL AUDIT - Last 24 Hours")
-    print(f"Time window : {start_time}  to  {end_time}")
-    print(f"Organisation: {ORG_ID}")
-    print("=" * 80)
+def _check_scim_put(record, lu):
+    """Check for SCIM PUT deactivation (active=false)."""
+    if SCIM_PATH not in lu or USERS_PATH not in lu:
+        return None
+    body = parse_body(record.get(REQUEST_BODY_KEY))
+    if body.get("active") is not False:
+        return None
+    name, email, uname = scim_user_info(body)
+    return make_removal("SCIM Deactivation (active=false)", record, name, email, uname)
 
-    print("\nFetching all audit logs...")
-    all_records = fetch_all_logs()
-    print(f"      Retrieved {len(all_records)} records\n")
 
-    removals = []
-    methods = {}
+def _check_scim_delete(record, lu):
+    """Check for SCIM DELETE on a user endpoint."""
+    if SCIM_PATH not in lu or USERS_PATH not in lu:
+        return None
+    return make_removal("SCIM User Deletion (DELETE)", record)
 
-    for record in all_records:
-        method = record.get("method", "")
-        uri = record.get("uri", "")
-        lu = uri.lower()
-        methods[method] = methods.get(method, 0) + 1
 
-        is_scim = SCIM_PATH in lu
-        is_user_path = USERS_PATH in lu
+def _check_direct_delete(record, lu):
+    """Check for direct (non-SCIM) user deletion."""
+    if USERS_PATH not in lu or SCIM_PATH in lu:
+        return None
+    body = parse_body(record.get(REQUEST_BODY_KEY))
+    return make_removal(
+        "Direct User Deletion", record,
+        body.get("displayName", body.get("name", UNKNOWN_USER)),
+        body.get("email", ""),
+        body.get("userName", ""),
+    )
 
-        # 1) SCIM PUT with active=false
-        if method == "PUT" and is_scim and is_user_path:
-            body = parse_body(record.get(REQUEST_BODY_KEY))
-            if body.get("active") is False:
-                name, email, uname = scim_user_info(body)
-                removals.append(make_removal("SCIM Deactivation (active=false)", record, name, email, uname))
 
-        # 2) SCIM DELETE /Users/
-        elif method == METHOD_DELETE and is_scim and is_user_path:
-            removals.append(make_removal("SCIM User Deletion (DELETE)", record))
+def _check_member_removal(record, lu):
+    """Check for workspace member removal."""
+    if "/member" not in lu:
+        return None
+    body = parse_body(record.get(REQUEST_BODY_KEY))
+    return make_removal(
+        "Workspace Member Removal", record,
+        body.get("name", UNKNOWN_USER),
+        body.get("email", ""),
+    )
 
-        # 3) Direct user deletion (non-SCIM)
-        elif method == METHOD_DELETE and is_user_path and not is_scim:
-            body = parse_body(record.get(REQUEST_BODY_KEY))
-            removals.append(make_removal(
-                "Direct User Deletion", record,
-                body.get("displayName", body.get("name", UNKNOWN_USER)),
-                body.get("email", ""),
-                body.get("userName", ""),
-            ))
 
-        # 4) Workspace member removal
-        elif method == METHOD_DELETE and "/member" in lu:
-            body = parse_body(record.get(REQUEST_BODY_KEY))
-            removals.append(make_removal(
-                "Workspace Member Removal", record,
-                body.get("name", UNKNOWN_USER),
-                body.get("email", ""),
-            ))
+def _check_scim_patch(record, lu):
+    """Check for SCIM PATCH deactivation."""
+    if SCIM_PATH not in lu or USERS_PATH not in lu:
+        return None
+    body = parse_body(record.get(REQUEST_BODY_KEY))
+    ops = body.get("Operations", body.get("operations", []))
+    if not isinstance(ops, list):
+        return None
+    for op in ops:
+        path = str(op.get("path", ""))
+        value = op.get("value", "")
+        vs = json.dumps(value).lower() if not isinstance(value, str) else value.lower()
+        if "active" in path.lower() and "false" in vs:
+            name, email, uname = scim_user_info(body)
+            return make_removal("SCIM PATCH Deactivation", record, name, email, uname)
+    return None
 
-        # 5) SCIM PATCH to deactivate
-        elif method == "PATCH" and is_scim and is_user_path:
-            body = parse_body(record.get(REQUEST_BODY_KEY))
-            ops = body.get("Operations", body.get("operations", []))
-            if isinstance(ops, list):
-                for op in ops:
-                    path = str(op.get("path", ""))
-                    value = op.get("value", "")
-                    vs = json.dumps(value).lower() if not isinstance(value, str) else value.lower()
-                    if "active" in path.lower() and "false" in vs:
-                        name, email, uname = scim_user_info(body)
-                        removals.append(make_removal("SCIM PATCH Deactivation", record, name, email, uname))
-                        break
 
-    print(f"  Methods breakdown: {json.dumps(methods, indent=2)}")
+def classify_record(record):
+    """Classify an audit log record, returning a removal dict or None."""
+    method = record.get("method", "")
+    lu = record.get("uri", "").lower()
 
-    # Deduplicate
+    handlers = {
+        "PUT": _check_scim_put,
+        METHOD_DELETE: lambda r, u: (
+            _check_scim_delete(r, u)
+            or _check_direct_delete(r, u)
+            or _check_member_removal(r, u)
+        ),
+        "PATCH": _check_scim_patch,
+    }
+    handler = handlers.get(method)
+    if handler:
+        return handler(record, lu)
+    return None
+
+
+def deduplicate(removals):
+    """Deduplicate removals by request_id."""
     seen = set()
     unique = []
     for r in removals:
@@ -202,41 +220,49 @@ def main():
             continue
         seen.add(rid)
         unique.append(r)
+    return unique
 
-    ok = sorted([r for r in unique if 200 <= r["status_code"] < 300], key=lambda x: x["timestamp"], reverse=True)
-    fail = sorted([r for r in unique if r["status_code"] >= 300], key=lambda x: x["timestamp"], reverse=True)
 
-    # --- Print results ---
+def print_results(ok, fail):
+    """Print the human-readable results."""
     print("\n" + "=" * 80)
     print("RESULTS: USER REMOVALS IN THE LAST 24 HOURS")
     print("=" * 80)
 
     if not ok:
         print("\n  No successful user removals detected in the last 24 hours.")
-    else:
-        print(f"\n  TOTAL SUCCESSFUL USER REMOVALS: {len(ok)}\n")
-        for i, r in enumerate(ok, 1):
-            print(f"  --- Removal #{i} ---")
-            print(f"    Type       : {r['type']}")
-            print(f"    Timestamp  : {r['timestamp']}")
-            print(f"    User Name  : {r['user_name']}")
-            if r["user_email"]:
-                print(f"    User Email : {r['user_email']}")
-            if r.get("username") and r["username"] != r.get("user_email"):
-                print(f"    Username   : {r['username']}")
-            print(f"    URI        : {r['uri']}")
-            print(f"    HTTP Status: {r['status_code']}")
-            print(f"    Actor      : {r['actor_type']} ({r['actor_user_id']})")
-            print(f"    Client IP  : {r['client_ip']}  ({r['country']})")
-            print(f"    Request ID : {r['request_id']}")
-            print()
+        return
+
+    print(f"\n  TOTAL SUCCESSFUL USER REMOVALS: {len(ok)}\n")
+    for i, r in enumerate(ok, 1):
+        _print_removal(i, r)
 
     if fail:
         print(f"\n  FAILED REMOVAL ATTEMPTS: {len(fail)}")
         for i, r in enumerate(fail, 1):
             print(f"    #{i} [{r['timestamp']}] {r['type']}: {r['user_name']} -> HTTP {r['status_code']}")
 
-    # JSON report
+
+def _print_removal(index, r):
+    """Print a single removal entry."""
+    print(f"  --- Removal #{index} ---")
+    print(f"    Type       : {r['type']}")
+    print(f"    Timestamp  : {r['timestamp']}")
+    print(f"    User Name  : {r['user_name']}")
+    if r["user_email"]:
+        print(f"    User Email : {r['user_email']}")
+    if r.get("username") and r["username"] != r.get("user_email"):
+        print(f"    Username   : {r['username']}")
+    print(f"    URI        : {r['uri']}")
+    print(f"    HTTP Status: {r['status_code']}")
+    print(f"    Actor      : {r['actor_type']} ({r['actor_user_id']})")
+    print(f"    Client IP  : {r['client_ip']}  ({r['country']})")
+    print(f"    Request ID : {r['request_id']}")
+    print()
+
+
+def write_report(ok, fail, total_scanned):
+    """Write the JSON report file and return the path."""
     by_type = {}
     for r in ok:
         by_type[r["type"]] = by_type.get(r["type"], 0) + 1
@@ -245,7 +271,7 @@ def main():
         "audit_window": {"start": start_time, "end": end_time},
         "organisation_id": ORG_ID,
         "generated_at": now.strftime(ISO8601_FMT),
-        "total_records_scanned": len(all_records),
+        "total_records_scanned": total_scanned,
         "summary": {
             "total_successful_removals": len(ok),
             "total_failed_attempts": len(fail),
@@ -258,6 +284,37 @@ def main():
     path = os.path.join(report_dir, "portkey_user_removal_report.json")
     with open(path, "w") as f:
         json.dump(report, f, indent=2)
+    return path, by_type
+
+
+def main():
+    """Run the audit."""
+    print("=" * 80)
+    print("PORTKEY USER REMOVAL AUDIT - Last 24 Hours")
+    print(f"Time window : {start_time}  to  {end_time}")
+    print(f"Organisation: {ORG_ID}")
+    print("=" * 80)
+
+    print("\nFetching all audit logs...")
+    all_records = fetch_all_logs()
+    print(f"      Retrieved {len(all_records)} records\n")
+
+    removals = []
+    methods = {}
+    for record in all_records:
+        methods[record.get("method", "")] = methods.get(record.get("method", ""), 0) + 1
+        removal = classify_record(record)
+        if removal:
+            removals.append(removal)
+
+    print(f"  Methods breakdown: {json.dumps(methods, indent=2)}")
+
+    unique = deduplicate(removals)
+    ok = sorted([r for r in unique if 200 <= r["status_code"] < 300], key=lambda x: x["timestamp"], reverse=True)
+    fail = sorted([r for r in unique if r["status_code"] >= 300], key=lambda x: x["timestamp"], reverse=True)
+
+    print_results(ok, fail)
+    path, by_type = write_report(ok, fail, len(all_records))
 
     print("\n" + "=" * 80)
     print("SUMMARY")
