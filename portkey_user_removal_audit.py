@@ -30,6 +30,7 @@ HEADERS = {"x-portkey-api-key": API_KEY}
 ISO8601_FMT = "%Y-%m-%dT%H:%M:%SZ"
 SCIM_PATH = "/scim/"
 USERS_PATH = "/users/"
+REQUEST_BODY_KEY = "request_body"
 
 now = datetime.now(timezone.utc)
 start_time = (now - timedelta(hours=24)).strftime(ISO8601_FMT)
@@ -146,7 +147,7 @@ def main():
 
         # 1) SCIM PUT with active=false
         if method == "PUT" and is_scim and is_user_path:
-            body = parse_body(record.get("request_body"))
+            body = parse_body(record.get(REQUEST_BODY_KEY))
             if body.get("active") is False:
                 name, email, uname = scim_user_info(body)
                 removals.append(make_removal("SCIM Deactivation (active=false)", record, name, email, uname))
@@ -157,7 +158,7 @@ def main():
 
         # 3) Direct user deletion (non-SCIM)
         elif method == "DELETE" and is_user_path and not is_scim:
-            body = parse_body(record.get("request_body"))
+            body = parse_body(record.get(REQUEST_BODY_KEY))
             removals.append(make_removal(
                 "Direct User Deletion", record,
                 body.get("displayName", body.get("name", "Unknown")),
@@ -167,7 +168,7 @@ def main():
 
         # 4) Workspace member removal
         elif method == "DELETE" and "/member" in lu:
-            body = parse_body(record.get("request_body"))
+            body = parse_body(record.get(REQUEST_BODY_KEY))
             removals.append(make_removal(
                 "Workspace Member Removal", record,
                 body.get("name", "Unknown"),
@@ -176,7 +177,7 @@ def main():
 
         # 5) SCIM PATCH to deactivate
         elif method == "PATCH" and is_scim and is_user_path:
-            body = parse_body(record.get("request_body"))
+            body = parse_body(record.get(REQUEST_BODY_KEY))
             ops = body.get("Operations", body.get("operations", []))
             if isinstance(ops, list):
                 for op in ops:
@@ -251,7 +252,8 @@ def main():
         "successful_removals": ok,
         "failed_removals": fail,
     }
-    path = "/workspace/portkey_user_removal_report.json"
+    report_dir = os.environ.get("REPORT_DIR", "/tmp")
+    path = os.path.join(report_dir, "portkey_user_removal_report.json")
     with open(path, "w") as f:
         json.dump(report, f, indent=2)
 
