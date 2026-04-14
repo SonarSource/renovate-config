@@ -3,7 +3,6 @@
     "extends": [
         "github>SonarSource/renovate-config",
         ":maintainLockFilesWeekly",
-        ":enablePreCommit",
         "docker:enableMajor",
         "docker:pinDigests"
     ],
@@ -26,6 +25,15 @@
     ],
     "dependencyDashboard": true,
     "configMigration": true,
+    "allowedPostUpgradeCommands": [
+        "^pre-commit autoupdate"
+    ],
+    "postUpgradeTasks": {
+        "commands": [
+            "pre-commit autoupdate --freeze || true"
+        ],
+        "executionMode": "branch"
+    },
     "addLabels": [
         "dependencies"
     ],
