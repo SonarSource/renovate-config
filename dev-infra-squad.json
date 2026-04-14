@@ -30,7 +30,7 @@
     ],
     "postUpgradeTasks": {
         "commands": [
-            "pre-commit autoupdate --freeze || true"
+            "pre-commit autoupdate --freeze"
         ],
         "executionMode": "branch"
     },
