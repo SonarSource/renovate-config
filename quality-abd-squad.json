@@ -31,7 +31,7 @@
             ],
             "pinDigests": false,
             "versioning": "regex:^v(?<major>\\d+)$",
-            "extractVersion": "^v(?<major>\\d+)",
+            "extractVersion": "^v(?<version>\\d+)",
             "groupName": "all Sonar GitHub Actions",
             "groupSlug": "all-sonar-github-actions"
         },
