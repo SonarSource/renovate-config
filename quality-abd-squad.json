@@ -27,7 +27,7 @@
                 "github-actions"
             ],
             "matchPackageNames": [
-                "SonarSource/*"
+                "SonarSource/**"
             ],
             "pinDigests": false,
             "versioning": "regex:^v(?<major>\\d+)$",
@@ -40,7 +40,7 @@
                 "github-actions"
             ],
             "matchPackageNames": [
-                "!SonarSource/*"
+                "!SonarSource/**"
             ],
             "pinDigests": true,
             "groupName": "all third-party GitHub Actions",
@@ -62,8 +62,8 @@
                 "maven",
                 "regex"
             ],
-            "matchPackageNames": [
-                "!org.sonarsource.api.plugin:sonar-plugin-api*"
+            "excludePackagePatterns": [
+                "^org\\.sonarsource\\.api\\.plugin:sonar-plugin-api"
             ],
             "matchUpdateTypes": [
                 "minor",
