@@ -69,6 +69,16 @@
             "groupSlug": "python-deps",
             "separateMinorPatch": false,
             "automerge": false
+        },
+        {
+            "description": "Skip minimumReleaseAge for SonarSource ECR runner base images (immediate updates)",
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackagePatterns": [
+                "^275878209202\\.dkr\\.ecr\\.eu-central-1\\.amazonaws\\.com/"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ],
     "vulnerabilityAlerts": {
