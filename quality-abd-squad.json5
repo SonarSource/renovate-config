@@ -1,0 +1,84 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>SonarSource/renovate-config:languages-team"
+  ],
+  "timezone": "Europe/Berlin",
+  "rebaseWhen": "conflicted",
+  "automerge": false,
+  "schedule": ["after 9pm", "before 7am"],
+  "enabledManagers": [
+    "maven",
+    // For Java dependencies in pom.xml files (analysis-runner, detection-calculator, utilities, importers)
+    "github-actions",
+    // For GitHub Actions workflow dependencies (when CI/CD is added)
+    "regex"
+    // For custom version detection in shell scripts (inherited from languages-team)
+  ],
+  // Define rules for how different package updates should be grouped and handled
+  "packageRules": [
+    // For sonarcloud.shared, the latest version is blocked to 2019. So we only consider four-part versions (X.Y.Z.BUILD),
+    // forcing the fallback non-released newer versions.
+    {
+      "matchPackageNames": ["com.sonarsource.sonarcloud.shared:*"],
+      "allowedVersions": "/^\\d+\\.\\d+\\.\\d+\\.\\d+$/"
+    },
+    // Group all SonarSource GitHub Actions together for easier maintenance and visibility, also, sonar actions are not pinned
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "SonarSource/*"
+      ],
+      "pinDigests": false,
+      // Track only major version tags (v1, v3, v6) — extractVersion strips everything after the major number
+      // so minor/patch tags (v1.3, v6.0.1) are invisible to Renovate and won't trigger PRs
+      "versioning": "regex:^v(?<major>\\d+)$",
+      "extractVersion": "^v(?<major>\\d+)",
+      "groupName": "all Sonar GitHub Actions",
+      "groupSlug": "all-sonar-github-actions"
+    },
+    // Group the rest of the GitHub Actions together
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchPackageNames": [
+        "!SonarSource/*"
+      ],
+      "pinDigests": true,
+      "groupName": "all third-party GitHub Actions",
+      "groupSlug": "all-3rd-party-github-actions"
+    },
+    // Add a special case for sonar-plugin-api updates, as they may require special attention due to compatibility concerns.
+    {
+      "matchManagers": [
+        "maven"
+      ],
+      "matchPackageNames": [
+        "org.sonarsource.api.plugin:sonar-plugin-api*"
+      ],
+      "groupName": "sonar-plugin-api",
+      "groupSlug": "sonar-plugin-api",
+      "prHeader": "**Before updating the plugin-api version, make sure to check the [compatibility matrix](https://github.com/SonarSource/sonar-plugin-api?tab=readme-ov-file#compatibility) and stick to the lowest denominator.**"
+    },
+    {
+      "matchManagers": [
+        "maven",
+        "regex"
+      ],
+      "matchPackageNames": [
+        "!org.sonarsource.api.plugin:sonar-plugin-api*"
+      ],
+      // Group ALL non-major updates together across all package managers
+      // This significantly reduces PR count by combining minor and patch updates
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    }
+  ]
+}
