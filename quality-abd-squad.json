@@ -1,71 +1,76 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>SonarSource/renovate-config:languages-team"
-  ],
-  "timezone": "Europe/Berlin",
-  "rebaseWhen": "conflicted",
-  "automerge": false,
-  "schedule": ["after 9pm", "before 7am"],
-  "enabledManagers": [
-    "maven",
-    "github-actions",
-    "regex"
-  ],
-  "packageRules": [
-    {
-      "matchPackageNames": ["com.sonarsource.sonarcloud.shared:*"],
-      "allowedVersions": "/^\\d+\\.\\d+\\.\\d+\\.\\d+$/"
-    },
-    {
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchPackageNames": [
-        "SonarSource/*"
-      ],
-      "pinDigests": false,
-      "versioning": "regex:^v(?<major>\\d+)$",
-      "extractVersion": "^v(?<major>\\d+)",
-      "groupName": "all Sonar GitHub Actions",
-      "groupSlug": "all-sonar-github-actions"
-    },
-    {
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchPackageNames": [
-        "!SonarSource/*"
-      ],
-      "pinDigests": true,
-      "groupName": "all third-party GitHub Actions",
-      "groupSlug": "all-3rd-party-github-actions"
-    },
-    {
-      "matchManagers": [
-        "maven"
-      ],
-      "matchPackageNames": [
-        "org.sonarsource.api.plugin:sonar-plugin-api*"
-      ],
-      "groupName": "sonar-plugin-api",
-      "groupSlug": "sonar-plugin-api",
-      "prHeader": "**Before updating the plugin-api version, make sure to check the [compatibility matrix](https://github.com/SonarSource/sonar-plugin-api?tab=readme-ov-file#compatibility) and stick to the lowest denominator.**"
-    },
-    {
-      "matchManagers": [
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config:languages-team"
+    ],
+    "timezone": "Europe/Berlin",
+    "rebaseWhen": "conflicted",
+    "automerge": false,
+    "schedule": [
+        "after 9pm",
+        "before 7am"
+    ],
+    "enabledManagers": [
         "maven",
+        "github-actions",
         "regex"
-      ],
-      "matchPackageNames": [
-        "!org.sonarsource.api.plugin:sonar-plugin-api*"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
-    }
-  ]
+    ],
+    "packageRules": [
+        {
+            "matchPackageNames": [
+                "com.sonarsource.sonarcloud.shared:*"
+            ],
+            "allowedVersions": "/^\\d+\\.\\d+\\.\\d+\\.\\d+$/"
+        },
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "SonarSource/*"
+            ],
+            "pinDigests": false,
+            "versioning": "regex:^v(?<major>\\d+)$",
+            "extractVersion": "^v(?<major>\\d+)",
+            "groupName": "all Sonar GitHub Actions",
+            "groupSlug": "all-sonar-github-actions"
+        },
+        {
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "!SonarSource/*"
+            ],
+            "pinDigests": true,
+            "groupName": "all third-party GitHub Actions",
+            "groupSlug": "all-3rd-party-github-actions"
+        },
+        {
+            "matchManagers": [
+                "maven"
+            ],
+            "matchPackageNames": [
+                "org.sonarsource.api.plugin:sonar-plugin-api*"
+            ],
+            "groupName": "sonar-plugin-api",
+            "groupSlug": "sonar-plugin-api",
+            "prHeader": "**Before updating the plugin-api version, make sure to check the [compatibility matrix](https://github.com/SonarSource/sonar-plugin-api?tab=readme-ov-file#compatibility) and stick to the lowest denominator.**"
+        },
+        {
+            "matchManagers": [
+                "maven",
+                "regex"
+            ],
+            "matchPackageNames": [
+                "!org.sonarsource.api.plugin:sonar-plugin-api*"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "all non-major dependencies",
+            "groupSlug": "all-minor-patch"
+        }
+    ]
 }
