@@ -1,0 +1,16 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "packageRules": [
+        {
+            "description": "Prevent updates to versions greater than the minimum supported version of sonar-plugin-api",
+            "matchManagers": [
+                "maven",
+                "gradle"
+            ],
+            "matchPackageNames": [
+                "org.sonarsource.api.plugin:sonar-plugin-api*"
+            ],
+            "allowedVersions": "<= 13.2.0.3137"
+        }
+    ]
+}
