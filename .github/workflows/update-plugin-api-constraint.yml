@@ -7,6 +7,9 @@ on:
 
 jobs:
   update:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -15,6 +18,7 @@ jobs:
         id: extract
         run: |
           README=$(curl -sf https://raw.githubusercontent.com/SonarSource/sonar-plugin-api/master/README.md)
+          [ -n "$README" ] || { echo "Failed to fetch README"; exit 1; }
 
           get_first_api_version() {
             echo "$README" | awk -v section="$1" '
@@ -27,17 +31,40 @@ jobs:
             '
           }
 
+          validate_api_version() {
+            label="$1"
+            version="$2"
+
+            if [ -z "$version" ]; then
+              echo "Error: failed to extract ${label} version from sonar-plugin-api README" >&2
+              exit 1
+            fi
+
+            if ! printf '%s\n' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "Error: extracted ${label} version '${version}' does not match expected x.y.z.build format" >&2
+              exit 1
+            fi
+          }
+
           SERVER_API=$(get_first_api_version "## SonarQube Server")
           COMMUNITY_API=$(get_first_api_version "## SonarQube Community Build")
-          CLOUD_API=$(echo "$README" | grep -oP 'Current version: \K[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
+          CLOUD_API=$(echo "$README" | grep -oP 'Current version: \K[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
           IDE_API=$(get_first_api_version "## SonarQube for IDE")
 
+          validate_api_version "SonarQube Server" "$SERVER_API"
+          validate_api_version "SonarQube Community Build" "$COMMUNITY_API"
+          validate_api_version "SonarQube Cloud" "$CLOUD_API"
+          validate_api_version "SonarQube for IDE" "$IDE_API"
+
           MIN_VERSION=$(printf '%s\n' "$SERVER_API" "$COMMUNITY_API" "$CLOUD_API" "$IDE_API" | sort -V | head -1)
+          [ -n "$MIN_VERSION" ] || { echo "Could not extract one or more API versions"; exit 1; }
           echo "min_version=$MIN_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Update sonar-plugin-api.json
+        env:
+          MIN_VERSION: ${{ steps.extract.outputs.min_version }}
         run: |
-          MIN="${{ steps.extract.outputs.min_version }}"
+          MIN="$MIN_VERSION"
           cat > sonar-plugin-api.json << EOF
           {
               "\$schema": "https://docs.renovatebot.com/renovate-schema.json",
