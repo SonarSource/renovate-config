@@ -9,5 +9,21 @@
     ],
     "reviewers": [
         "team:quality-jvm-squad"
+    ],
+    "packageRules": [
+        {
+            "description": "SonarSource GitHub actions do not need version pinning",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackagePatterns": [
+                "^SonarSource/"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "rollback"
+            ],
+            "enabled": false
+        }
     ]
 }
