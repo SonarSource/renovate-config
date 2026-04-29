@@ -24,6 +24,18 @@
                 "rollback"
             ],
             "enabled": false
+        },
+        {
+            "description": "Parent POM should be updated separately",
+            "matchManagers": [
+                "maven"
+            ],
+            "matchPackageNames": [
+                "org.sonarsource.parent:parent",
+                "com.sonarsource.parent:parent"
+            ],
+            "groupName": "Parent",
+            "groupSlug": "parent"
         }
     ]
 }
