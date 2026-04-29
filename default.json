@@ -129,6 +129,13 @@
             "minimumReleaseAge": "0 days"
         },
         {
+            "description": "Do not update SonarSource Jira automation actions; use branch-version (@v2).",
+            "matchDepNames": [
+                "SonarSource/gh-action-lt-backlog/**"
+            ],
+            "enabled": false
+        },
+        {
             "matchDatasources": [
                 "maven"
             ],
