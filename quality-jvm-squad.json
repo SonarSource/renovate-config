@@ -1,0 +1,48 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config:languages-team"
+    ],
+    "enabledManagers": [
+        "maven",
+        "gradle",
+        "gradle-wrapper",
+        "github-actions",
+        "regex"
+    ],
+    "timezone": "Europe/Berlin",
+    "schedule": [
+        "before 6am on Monday"
+    ],
+    "reviewers": [
+        "team:quality-jvm-squad"
+    ],
+    "packageRules": [
+        {
+            "description": "SonarSource GitHub actions do not need version pinning",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackagePatterns": [
+                "^SonarSource/"
+            ],
+            "matchUpdateTypes": [
+                "pin",
+                "rollback"
+            ],
+            "enabled": false
+        },
+        {
+            "description": "Parent POM should be updated separately",
+            "matchManagers": [
+                "maven"
+            ],
+            "matchPackageNames": [
+                "org.sonarsource.parent:parent",
+                "com.sonarsource.parent:parent"
+            ],
+            "groupName": "Parent",
+            "groupSlug": "parent"
+        }
+    ]
+}

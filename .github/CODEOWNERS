@@ -7,3 +7,4 @@
 # squad configuration files
 organization-reporting-squad.json @sonarsource/orchestration-reporting-squad
 quality-abd-squad.json @sonarsource/quality-abd-squad
+quality-jvm-squad.json @sonarsource/quality-jvm-squad
