@@ -3,6 +3,13 @@
     "extends": [
         "github>SonarSource/renovate-config:languages-team"
     ],
+    "enabledManagers": [
+        "maven",
+        "gradle",
+        "gradle-wrapper",
+        "github-actions",
+        "regex"
+    ],
     "timezone": "Europe/Berlin",
     "schedule": [
         "before 6am on Monday"
