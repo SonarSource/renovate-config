@@ -33,6 +33,16 @@
             "enabled": false
         },
         {
+            "description": "gh-action_release uses branch-based versioning (v6, v7) which Renovate cannot resolve -- update manually",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "SonarSource/gh-action_release"
+            ],
+            "enabled": false
+        },
+        {
             "description": "Parent POM should be updated separately",
             "matchManagers": [
                 "maven"
@@ -43,6 +53,27 @@
             ],
             "groupName": "Parent",
             "groupSlug": "parent"
+        },
+        {
+            "matchPackageNames": [
+                "org.sonarsource.analyzer-commons*"
+            ],
+            "groupName": "Analyzer Commons",
+            "groupSlug": "analyzer-commons"
+        },
+        {
+            "matchPackageNames": [
+                "org.sonarsource.orchestrator*"
+            ],
+            "groupName": "Orchestrator",
+            "groupSlug": "orchestrator"
+        },
+        {
+            "matchPackageNames": [
+                "org.sonarsource.slang*"
+            ],
+            "groupName": "Slang",
+            "groupSlug": "slang"
         }
     ]
 }
