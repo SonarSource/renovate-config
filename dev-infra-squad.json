@@ -118,7 +118,7 @@
                 "^cdk\\.context\\.json$"
             ],
             "matchStrings": [
-                ".*[\\\"|\"]ami:account=(?<account>[0-9]{12}):filters\\.image-type\\.0=(?<imageType>.*?):filters\\.name\\.0=(?<imageName>.*?)(?::filters\\.platform\\.0=(?<platform>.*?))?:.*[\\\"|\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
+                ".*[\\\"]ami:account=(?<account>[0-9]{12}):filters\\.image-type\\.0=(?<imageType>[^:]+):filters\\.name\\.0=(?<imageName>[^:]+)(?::filters\\.platform\\.0=(?<platform>[^:]+))?:.*[\\\"]:[ ]*?[\\\"|\"]?(?<currentValue>ami-[a-z0-9]{17})[\\\"|\"]?"
             ],
             "datasourceTemplate": "aws-machine-image",
             "versioningTemplate": "aws-machine-image",
