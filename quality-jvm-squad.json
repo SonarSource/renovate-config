@@ -74,6 +74,16 @@
             ],
             "groupName": "Slang",
             "groupSlug": "slang"
+        },
+        {
+            "matchManagers": [
+                "gradle"
+            ],
+            "matchPackageNames": [
+                "org.sonarqube"
+            ],
+            "groupName": "Sonar Gradle Plugin",
+            "groupSlug": "sonar-gradle-plugin"
         }
     ]
 }
