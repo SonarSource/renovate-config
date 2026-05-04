@@ -55,6 +55,21 @@
             "groupSlug": "parent"
         },
         {
+            "description": "Pluging API has compatibility rules, so disable it to prevent accidental updates",
+            "matchPackageNames": [
+                "org.sonarsource.api.plugin:sonar-plugin-api*"
+            ],
+            "enabled": false
+        },
+        {
+            "matchPackageNames": [
+                "org.sonarsource.sonarlint.core*",
+                "org.sonarsource.sonarqube*"
+            ],
+            "groupName": "Sonar dependencies",
+            "groupSlug": "sonar-dependencies"
+        },
+        {
             "matchPackageNames": [
                 "org.sonarsource.analyzer-commons*"
             ],
@@ -74,6 +89,16 @@
             ],
             "groupName": "Slang",
             "groupSlug": "slang"
+        },
+        {
+            "matchManagers": [
+                "gradle-wrapper"
+            ],
+            "matchPackageNames": [
+                "gradle"
+            ],
+            "groupName": "Gradle updates",
+            "groupSlug": "gradle-updates"
         },
         {
             "matchManagers": [
