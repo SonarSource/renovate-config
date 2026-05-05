@@ -97,8 +97,8 @@
             "matchPackageNames": [
                 "gradle"
             ],
-            "groupName": "Gradle updates",
-            "groupSlug": "gradle-updates"
+            "groupName": "Gradle wrapper",
+            "groupSlug": "gradle-wrapper"
         },
         {
             "matchManagers": [
