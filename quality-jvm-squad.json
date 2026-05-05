@@ -101,9 +101,6 @@
             "groupSlug": "gradle-wrapper"
         },
         {
-            "matchManagers": [
-                "gradle"
-            ],
             "matchPackageNames": [
                 "org.sonarqube"
             ],
