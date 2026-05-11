@@ -6,7 +6,7 @@
         ":separateMultipleMajorReleases",
         "customManagers:dockerfileVersions"
     ],
-    "description": "Schedule once a month on the first weekend of the month at night (0-5 UTC).",
+    "description": "Schedule every day at night (0-2 UTC).",
     "schedule": [
         "* 0-2 * * *"
     ],
