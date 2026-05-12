@@ -7,7 +7,6 @@
         "after 7am every weekday",
         "before 7pm every weekday"
     ],
-    "dependencyDashboard": true,
     "configMigration": true,
     "rebaseWhen": "conflicted",
     "prConcurrentLimit": 10,
