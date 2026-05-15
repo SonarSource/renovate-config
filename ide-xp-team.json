@@ -38,6 +38,17 @@
             ]
         },
         {
+            "description": "Override inherited manager grouping from default.json, one PR per dependency",
+            "matchManagers": [
+                "maven",
+                "gradle",
+                "gradle-wrapper",
+                "npm",
+                "nuget"
+            ],
+            "groupName": null
+        },
+        {
             "description": "Group all GitHub Actions in the same PR with SHA pinning",
             "matchManagers": [
                 "github-actions"
