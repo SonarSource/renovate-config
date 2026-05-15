@@ -38,7 +38,7 @@
             ]
         },
         {
-            "description": "Override inherited manager grouping from default.json — one PR per dependency",
+            "description": "Override inherited manager grouping from default.json, one PR per dependency",
             "matchManagers": [
                 "maven",
                 "gradle",
