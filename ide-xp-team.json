@@ -7,7 +7,12 @@
         "after 7am every weekday",
         "before 7pm every weekday"
     ],
-    "dependencyDashboard": true,
+    "configMigration": true,
+    "rebaseWhen": "conflicted",
+    "prConcurrentLimit": 10,
+    "addLabels": [
+        "renovate-dependencies"
+    ],
     "vulnerabilityAlerts": {
         "enabled": true,
         "labels": [
@@ -17,56 +22,23 @@
     "osvVulnerabilityAlerts": true,
     "packageRules": [
         {
-            "description": "Group all SonarLint Core (SLCORE) packages in a dedicated PR (released versions only)",
-            "matchDatasources": [
-                "maven"
+            "description": "Ignore Java runtime version updates (managed manually)",
+            "matchDepNames": [
+                "java"
             ],
-            "matchPackagePatterns": [
-                "^org\\.sonarsource\\.sonarlint\\.core:"
-            ],
-            "matchUpdateTypes": [
-                "patch",
-                "minor",
-                "major"
-            ],
-            "groupName": "SonarLint Core dependencies",
-            "groupSlug": "sonarlint-core-dependencies"
+            "enabled": false
         },
         {
-            "description": "Group all analyzer packages in a dedicated PR (excludes SLCORE)",
-            "matchDatasources": [
-                "maven"
+            "description": "Throttle mise updates: releases daily (CalVer), open a PR at most once a month",
+            "matchDepNames": [
+                "mise"
             ],
-            "matchPackagePatterns": [
-                "^org\\.sonarsource\\.",
-                "^com\\.sonarsource\\."
-            ],
-            "excludePackagePatterns": [
-                "^org\\.sonarsource\\.sonarlint\\.core:"
-            ],
-            "matchUpdateTypes": [
-                "patch",
-                "minor",
-                "major"
-            ],
-            "groupName": "analyzer dependencies",
-            "groupSlug": "analyzer-dependencies"
+            "schedule": [
+                "on the first day of the month"
+            ]
         },
         {
-            "description": "Group all minor and patch updates in a single PR to reduce noise (excludes analyzers and SLCORE)",
-            "matchUpdateTypes": [
-                "patch",
-                "minor"
-            ],
-            "excludePackagePatterns": [
-                "^org\\.sonarsource\\.",
-                "^com\\.sonarsource\\."
-            ],
-            "groupName": "all minor and patch updates",
-            "groupSlug": "all-minor-patch"
-        },
-        {
-            "description": "Group all GitHub Actions in the same PR",
+            "description": "Group all GitHub Actions in the same PR with SHA pinning",
             "matchManagers": [
                 "github-actions"
             ],
