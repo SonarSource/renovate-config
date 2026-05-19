@@ -9,6 +9,11 @@
     ],
     "configMigration": true,
     "rebaseWhen": "conflicted",
+    "allowedPostUpgradeCommands": [
+        "^\\./gradlew .{0,500}--write-locks.{0,500}$",
+        "^dotnet restore .{0,200}$",
+        "^bun install$"
+    ],
     "prConcurrentLimit": 10,
     "addLabels": [
         "renovate-dependencies"
@@ -43,6 +48,7 @@
                 "maven",
                 "gradle",
                 "gradle-wrapper",
+                "gradle-version-catalog",
                 "npm",
                 "nuget"
             ],
