@@ -10,7 +10,7 @@
     "labels": [
         "dependency-update"
     ],
-    "rebaseWhen": "never",
+    "rebaseWhen": "conflicted",
     "packageRules": [
         {
             "description": "Group all patch updates in a single PR",
