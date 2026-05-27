@@ -4,7 +4,7 @@
         "github>SonarSource/renovate-config"
     ],
     "timezone": "US/Central",
-    "rebaseWhen": "never",
+    "rebaseWhen": "conflicted",
     "schedule": [
         "* 7-15 * * 1"
     ],
