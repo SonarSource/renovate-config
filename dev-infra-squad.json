@@ -79,6 +79,13 @@
                 "^275878209202\\.dkr\\.ecr\\.eu-central-1\\.amazonaws\\.com/"
             ],
             "minimumReleaseAge": "0 days"
+        },
+        {
+            "description": "Skip minimumReleaseAge for EC2 AMI updates",
+            "matchDatasources": [
+                "aws-machine-image"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ],
     "vulnerabilityAlerts": {
