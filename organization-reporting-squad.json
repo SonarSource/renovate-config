@@ -20,6 +20,7 @@
     "addLabels": [
         "dependencies"
     ],
+    "minimumReleaseAgeBehaviour": "timestamp-optional",
     "draftPR": false,
     "packageRules": [
         {
