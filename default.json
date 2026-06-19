@@ -10,9 +10,9 @@
     "prCreation": "not-pending",
     "rebaseWhen": "never",
     "allowedPostUpgradeCommands": [
-        "^pre-commit autoupdate",
-        "^\\.\/gradlew .{0,500}--write-locks.{0,500}$",
-        "^dotnet restore .{0,200}$",
+        "^pre-commit autoupdate( --freeze)?( \\|\\| true)?$",
+        "^\\./gradlew [^;&|]{0,500}--write-locks[^;&|]{0,500}$",
+        "^dotnet restore [^;&|]{0,200}$",
         "^bun install$"
     ],
     "packageRules": [
