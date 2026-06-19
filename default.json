@@ -9,6 +9,9 @@
     "minimumReleaseAgeBehaviour": "timestamp-required",
     "prCreation": "not-pending",
     "rebaseWhen": "never",
+    "allowedPostUpgradeCommands": [
+        "^pre-commit autoupdate"
+    ],
     "packageRules": [
         {
             "matchDepTypes": [
