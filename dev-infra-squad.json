@@ -143,15 +143,6 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^\\.cirrus\\.star$"
-            ],
-            "matchStrings": [
-                "datasource=(?<datasource>.*?) depName=(?<depName>.*?)\\n.*load.*\"github.com\\/.*@(?<currentDigest>[a-f0-9]+)\",.* # (?<currentValue>.*)"
-            ]
-        },
-        {
-            "customType": "regex",
             "comment": "Match legacy depName and new packageName parameters",
             "fileMatch": [
                 ".*\\.sh$",

@@ -90,20 +90,6 @@ Replaces version strings in `cdk.context.json` files. Works
 with [LookupMachineImage](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_ec2/LookupMachineImage.html). Only the `name` parameter
 is used by the manager. Any additional parameters such as `filters` are ignored.
 
-#### Cirrus CI modules in the main Starlark files
-
-Replaces Cirrus CI modules version or digest strings in `.cirrus.star` and `lib.star` files.
-
-##### Example
-
-```starlark
-# renovate: datasource=github-releases depName=SonarSource/cirrus-modules
-load("github.com/SonarSource/cirrus-modules@2.9.0", "load_features")
-
-# renovate: datasource=github-releases depName=SonarSource/cirrus-modules
-load("github.com/SonarSource/cirrus-modules@54babd3268dd6daf42ad877100789169a14e5fb3", "load_features")  # 2.9.0
-```
-
 #### ghcr.io Docker images in Cirrus CI YAML file
 
 Replaces ghcr.io Docker images version in `.cirrus.yaml`, `.cirrus.yml`.
