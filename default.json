@@ -135,6 +135,31 @@
             "minimumReleaseAge": "0 days"
         },
         {
+            "description": "Skip minimumReleaseAge for internal SonarSource NuGet registries in Repox",
+            "matchDatasources": [
+                "nuget"
+            ],
+            "matchRegistryUrls": [
+                "**/sonarsource-nuget-*/**"
+            ],
+            "minimumReleaseAge": "0 days"
+        },
+        {
+            "description": "Fetch NuGet release timestamps from nuget.org; Repox proxy does not expose published",
+            "matchDatasources": [
+                "nuget"
+            ],
+            "matchRegistryUrls": [
+                "**/artifactory/api/nuget/v3/nuget/**",
+                "**/artifactory/api/nuget/nuget"
+            ],
+            "registryUrls": [
+                "https://api.nuget.org/v3/index.json",
+                "https://repox.jfrog.io/artifactory/api/nuget/v3/nuget/index.json",
+                "https://repox.jfrog.io/artifactory/api/nuget/nuget"
+            ]
+        },
+        {
             "description": "Do not update SonarSource Jira automation actions; use branch-version (@v2).",
             "matchDepNames": [
                 "SonarSource/gh-action-lt-backlog/**"
