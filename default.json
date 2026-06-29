@@ -215,6 +215,12 @@
             "matchHost": "repox.jfrog.io",
             "username": "renovate-read",
             "password": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "hostType": "npm",
+            "matchHost": "repox.jfrog.io",
+            "username": "renovate-read",
+            "password": "{{ secrets.REPOX_TOKEN }}"
         }
     ],
     "customManagers": [
