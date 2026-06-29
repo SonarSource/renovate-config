@@ -149,9 +149,14 @@
             "matchDatasources": [
                 "nuget"
             ],
+            "matchRegistryUrls": [
+                "**/artifactory/api/nuget/v3/nuget/**",
+                "**/artifactory/api/nuget/nuget"
+            ],
             "registryUrls": [
                 "https://api.nuget.org/v3/index.json",
-                "https://repox.jfrog.io/artifactory/api/nuget/v3/nuget/index.json"
+                "https://repox.jfrog.io/artifactory/api/nuget/v3/nuget/index.json",
+                "https://repox.jfrog.io/artifactory/api/nuget/nuget"
             ]
         },
         {
