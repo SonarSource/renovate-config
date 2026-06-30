@@ -8,7 +8,7 @@
     "minimumReleaseAge": "5 days",
     "minimumReleaseAgeBehaviour": "timestamp-required",
     "prCreation": "not-pending",
-    "rebaseWhen": "never",
+    "rebaseWhen": "conflicted",
     "allowedPostUpgradeCommands": [
         "^pre-commit autoupdate( --freeze)?( \\|\\| true)?$",
         "^\\./gradlew [^;&|]{0,500}--write-locks[^;&|]{0,500}$",
