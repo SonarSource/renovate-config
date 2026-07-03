@@ -85,6 +85,16 @@
                 "aws-machine-image"
             ],
             "minimumReleaseAge": "0 days"
+        },
+        {
+            "description": "Skip minimumReleaseAge for GitHub Actions runner base image updates",
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "ghcr.io/actions/actions-runner"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ],
     "vulnerabilityAlerts": {
@@ -142,7 +152,7 @@
         },
         {
             "customType": "regex",
-            "comment": "Match legacy depName and new packageName parameters",
+            "description": "Match legacy depName and new packageName parameters",
             "fileMatch": [
                 ".*\\.sh$",
                 ".*\\.?Dockerfile"
