@@ -142,6 +142,13 @@ export KOTLIN_VERSION=2.15.0.2579
 - after the `export` directive use a descriptive variable name for storing the release version. The version number in the format
   of `MAJOR.MINOR.PATCH.BUILD` and is managed by Renovate.
 
+### [`quality-corelang-squad`](quality-corelang-squad.json)
+```json
+  "extends": ["github>SonarSource/renovate-config:quality-corelang-squad"]
+```
+
+Shared preset for Core Languages & Parsers repositories. It keeps immediate Renovate PR creation and `rebaseWhen: "never"`, limits enabled managers to the ones used across the squad repositories, disables grouping by default, and leaves `SonarSource/*` GitHub Actions on floating major refs such as `@v3`.
+
 ## Development
 
 ### Prerequisites
