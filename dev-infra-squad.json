@@ -24,15 +24,6 @@
     ],
     "dependencyDashboard": true,
     "configMigration": true,
-    "allowedPostUpgradeCommands": [
-        "^pre-commit autoupdate"
-    ],
-    "postUpgradeTasks": {
-        "commands": [
-            "pre-commit autoupdate --freeze || true"
-        ],
-        "executionMode": "branch"
-    },
     "addLabels": [
         "dependencies"
     ],
