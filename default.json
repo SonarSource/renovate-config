@@ -221,6 +221,13 @@
             "matchHost": "repox.jfrog.io",
             "username": "renovate-read",
             "password": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "description": "Yarn Berry auth for npm virtual repository in Repox",
+            "hostType": "npm",
+            "matchHost": "https://repox.jfrog.io/artifactory/api/npm/npm/",
+            "username": "renovate-read",
+            "password": "{{ secrets.REPOX_TOKEN }}"
         }
     ],
     "customManagers": [
