@@ -155,7 +155,7 @@ On top of the shared default behavior, it:
 - leaves `SonarSource/**` GitHub Actions on floating major refs such as `@v3`
 - groups MSTest dependencies, including `Verify.MSTest`
 - groups `Google.Protobuf` with `Grpc.Tools`
-- keeps `FluentAssertions` below `8.0.0`
+- keeps `FluentAssertions` below `8.0.0` due to change to paid license
 - groups Sonar parent POM updates
 - groups Roslyn dependencies
 

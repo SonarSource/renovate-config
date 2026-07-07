@@ -91,7 +91,7 @@
         "nuget"
       ],
       "matchPackageNames": [
-        "Microsoft.CodeAnalysis.*"
+        "Microsoft.CodeAnalysis*"
       ],
       "groupName": "Roslyn"
     }
