@@ -223,7 +223,7 @@
             "password": "{{ secrets.REPOX_TOKEN }}"
         },
         {
-            "description": "Yarn Berry auth for npm virtual repository in Repox",
+            "description": "Yarn Berry only: exact matchHost required to inject auth into .yarnrc.yml npmRegistries (generic repox.jfrog.io rule above is insufficient)",
             "hostType": "npm",
             "matchHost": "https://repox.jfrog.io/artifactory/api/npm/npm/",
             "username": "renovate-read",
