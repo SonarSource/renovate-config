@@ -76,7 +76,8 @@
                 "aws-machine-image"
             ],
             "minimumReleaseAge": "0 days",
-            "prCreation": "immediate"
+            "prCreation": "immediate",
+            "internalChecksFilter": "none"
         },
         {
             "description": "Skip minimumReleaseAge for GitHub Actions runner base image updates",
