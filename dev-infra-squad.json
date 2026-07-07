@@ -71,11 +71,13 @@
             "minimumReleaseAge": "0 days"
         },
         {
-            "description": "Skip minimumReleaseAge for EC2 AMI updates",
+            "description": "Skip minimumReleaseAge for EC2 AMI updates and create PRs immediately",
             "matchDatasources": [
                 "aws-machine-image"
             ],
-            "minimumReleaseAge": "0 days"
+            "minimumReleaseAge": "0 days",
+            "prCreation": "immediate",
+            "internalChecksFilter": "none"
         },
         {
             "description": "Skip minimumReleaseAge for GitHub Actions runner base image updates",
