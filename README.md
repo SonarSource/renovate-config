@@ -142,6 +142,23 @@ export KOTLIN_VERSION=2.15.0.2579
 - after the `export` directive use a descriptive variable name for storing the release version. The version number in the format
   of `MAJOR.MINOR.PATCH.BUILD` and is managed by Renovate.
 
+### [`quality-corelang-squad`](quality-corelang-squad.json)
+```json
+  "extends": ["github>SonarSource/renovate-config:quality-corelang-squad"]
+```
+
+Shared preset for Core Languages & Parsers repositories. It extends the shared `default` preset, keeps `minimumReleaseAgeBehaviour: "timestamp-optional"`, creates PRs immediately, keeps `rebaseWhen: "never"`, adds the `dependencies` label, and enables only `github-actions`, `maven`, `nuget`, `gradle`, `gradle-wrapper`, `npm`, `cargo`, `dockerfile`, `pre-commit`, and `mise`.
+
+On top of the shared default behavior, it:
+
+- disables grouping by default
+- leaves `SonarSource/**` GitHub Actions on floating major refs such as `@v3`
+- groups MSTest dependencies, including `Verify.MSTest`
+- groups `Google.Protobuf` with `Grpc.Tools`
+- keeps `FluentAssertions` below `8.0.0` due to change to paid license
+- groups Sonar parent POM updates
+- groups Roslyn dependencies
+
 ## Development
 
 ### Prerequisites
