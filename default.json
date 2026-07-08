@@ -160,6 +160,15 @@
             ]
         },
         {
+            "description": "Resolve npm packages via Repox (mirrors the public npm registry), so Renovate does not need each repo to commit its own .npmrc to avoid falling back to registry.npmjs.org",
+            "matchDatasources": [
+                "npm"
+            ],
+            "registryUrls": [
+                "https://repox.jfrog.io/artifactory/api/npm/npm/"
+            ]
+        },
+        {
             "description": "Do not update SonarSource Jira automation actions; use branch-version (@v2).",
             "matchDepNames": [
                 "SonarSource/gh-action-lt-backlog/**"
