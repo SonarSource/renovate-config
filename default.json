@@ -25,6 +25,17 @@
             "rollbackPrs": true
         },
         {
+            "description": "Do not pin digests for any SonarSource action tracked at the @master branch ref - this also covers actions annotated with a trailing '# dogfood' comment (e.g. 'uses: SonarSource/x@master # dogfood'), where the existing comment breaks Renovate's digest-pin write/verify round-trip and aborts the whole branch",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchDepNames": [
+                "SonarSource/**"
+            ],
+            "matchCurrentValue": "/^master$/",
+            "pinDigests": false
+        },
+        {
             "description": "Group GitHub Actions updates",
             "matchManagers": [
                 "github-actions"
