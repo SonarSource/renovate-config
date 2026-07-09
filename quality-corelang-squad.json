@@ -41,6 +41,16 @@
             "enabled": false
         },
         {
+            "description": "Do not raise patch updates for mise-managed tools; repositories should stay on fuzzy major or minor values instead of vendor-specific patch pins",
+            "matchManagers": [
+                "mise"
+            ],
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "enabled": false
+        },
+        {
             "description": "Group MSTest dependencies into a single PR",
             "matchManagers": [
                 "nuget"
