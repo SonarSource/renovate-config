@@ -99,6 +99,7 @@
                 "pypi"
             ],
             "matchPackageNames": [
+                "sc-cdk",
                 "sc_cdk",
                 "pytest-cov",
                 "boto3",
@@ -107,6 +108,7 @@
                 "syrupy",
                 "pytest",
                 "coverage",
+                "cdk-nag",
                 "cdk_nag",
                 "constructs",
                 "exceptiongroup",
