@@ -31,6 +31,18 @@
             "groupName": null
         },
         {
+            "description": "Group updates per source repository (monorepo), fallback to per dependency.",
+            "matchManagers": [
+                "npm",
+                "maven",
+                "gradle",
+                "nuget",
+                "cargo"
+            ],
+            "groupName": "{{#if sourceRepo}}{{sourceRepo}} monorepo{{else}}{{depName}}{{/if}}",
+            "groupSlug": "{{#if sourceRepo}}{{sourceRepo}}{{else}}{{depName}}{{/if}}"
+        },
+        {
             "description": "Do not update SonarSource GH actions, we want the branch-version. Only external actions must have commit ID.",
             "matchManagers": [
                 "github-actions"
