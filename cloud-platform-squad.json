@@ -92,6 +92,27 @@
             "addLabels": [
                 "github-actions"
             ]
+        },
+        {
+            "description": "Skip minimumReleaseAge for specific python packages",
+            "matchDatasources": [
+                "pypi"
+            ],
+            "matchPackageNames": [
+                "sc_cdk",
+                "pytest-cov",
+                "boto3",
+                "botocore",
+                "aws-cdk-lib",
+                "syrupy",
+                "pytest",
+                "coverage",
+                "cdk_nag",
+                "constructs",
+                "exceptiongroup",
+                "mypy"
+            ],
+            "minimumReleaseAge": "0 days"
         }
     ],
     "customManagers": [
