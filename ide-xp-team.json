@@ -62,6 +62,13 @@
             "groupName": "github actions",
             "groupSlug": "github-actions",
             "pinDigests": true
+        },
+        {
+            "description": "Analyzer plugins are updated by a separate Cursor automation",
+            "matchPackageNames": [
+                "org.sonarsource.*:sonar-*-plugin"
+            ],
+            "enabled": false
         }
     ]
 }
