@@ -5,7 +5,13 @@
 *.md
 
 # squad configuration files
+cloud-platform-squad.json @sonarsource/platform-cloud-engineering-squad
+data-team.json @sonarsource/data-agentic-data-ml-platform-squad
+frontend-engineering-squad.json @sonarsource/platform-front-end-squad
+ide-xp-team.json @sonarsource/remediation-ide-experience-squad
+languages-team.json @sonarsource/security-cloud-squad @sonarsource/security-stl-taint-squad @sonarsource/code-quality-ci-experience-squad
 organization-reporting-squad.json @sonarsource/orchestration-reporting-squad
+orchestration-storage-squad.json @sonarsource/data-agentic-code-data-storage-squad
 quality-abd-squad.json @sonarsource/quality-abd-squad
 quality-corelang-squad.json @sonarsource/code-quality-core-languages-parsers-squad
 quality-jvm-squad.json @sonarsource/quality-jvm-squad
