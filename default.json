@@ -238,8 +238,7 @@
         {
             "hostType": "pypi",
             "matchHost": "repox.jfrog.io",
-            "username": "renovate-read",
-            "password": "{{ secrets.REPOX_TOKEN }}"
+            "token": "{{ secrets.REPOX_TOKEN }}"
         },
         {
             "hostType": "nuget",
