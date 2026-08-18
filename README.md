@@ -38,7 +38,7 @@ The preset also includes an additional non-manager grouping rule that groups all
 
 #### Authentication
 
-Provides authentication credentials to https://repox.jfrog.io. The following package managers were tested for compatibility: `npm`, `maven`, `gradle`, `pipenv`, `poetry`, and `nuget`.
+Provides authentication credentials to https://repox.jfrog.io. The following package managers were tested for compatibility: `npm`, `maven`, `gradle`, `pipenv`, `poetry`, `nuget`, and `uv`.
 
 > Note: authentication only works when Renovate is executed using the GitHub app. If you are running locally, see the instructions at [local-testing](#local-testing).
 
