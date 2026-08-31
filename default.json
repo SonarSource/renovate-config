@@ -191,6 +191,21 @@
             ]
         },
         {
+            "description": "ci-github-actions @vN branch refs: resolve branches via github-digest (not semver tags), never SHA-pin.",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchDepNames": [
+                "SonarSource/ci-github-actions"
+            ],
+            "matchCurrentValue": "/^v\\d+$/",
+            "overrideDatasource": "github-digest",
+            "versioning": "docker",
+            "allowedVersions": "/^v\\d+$/",
+            "pinDigests": false,
+            "rangeStrategy": "replace"
+        },
+        {
             "description": "Do not update SonarSource Jira automation actions; use branch-version (@v2).",
             "matchDepNames": [
                 "SonarSource/gh-action-lt-backlog/**"
