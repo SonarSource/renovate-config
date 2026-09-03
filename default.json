@@ -196,7 +196,19 @@
                 "github-actions"
             ],
             "matchDepNames": [
-                "SonarSource/ci-github-actions"
+                "SonarSource/ci-github-actions",
+                "SonarSource/gh-action_azure-artifact-signing",
+                "SonarSource/gh-action_cache",
+                "SonarSource/gh-action_pre-commit",
+                "SonarSource/gh-action_releasability",
+                "SonarSource/gh-action_release",
+                "SonarSource/gh-action_sbom",
+                "SonarSource/gh-action_slack-notify",
+                "SonarSource/gh-action-lt-backlog",
+                "SonarSource/mise-action-wrapper",
+                "SonarSource/gh-action_dogfood_merge",
+                "SonarSource/unified-dogfooding-actions",
+                "SonarSource/vault-action-wrapper"
             ],
             "matchCurrentValue": "/^v\\d+$/",
             "overrideDatasource": "github-digest",
@@ -204,13 +216,6 @@
             "allowedVersions": "/^v\\d+$/",
             "pinDigests": false,
             "rangeStrategy": "replace"
-        },
-        {
-            "description": "Do not update SonarSource Jira automation actions; use branch-version (@v2).",
-            "matchDepNames": [
-                "SonarSource/gh-action-lt-backlog/**"
-            ],
-            "enabled": false
         },
         {
             "description": "Do not update private SonarSource reusable workflows inaccessible to Renovate.",
