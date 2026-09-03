@@ -221,9 +221,7 @@
             "description": "Do not update private SonarSource reusable workflows inaccessible to Renovate.",
             "matchDepNames": [
                 "SonarSource/sonarqube-cloud-github-actions",
-                "SonarSource/sonarqube-cloud-github-actions/**",
-                "SonarSource/sqc-e2e-tests",
-                "SonarSource/sqc-e2e-tests/**"
+                "SonarSource/sqc-e2e-tests"
             ],
             "enabled": false
         },
