@@ -63,6 +63,19 @@
             "enabled": false
         },
         {
+            "description": "Do not raise patch updates for setup-java runtime selectors; repositories should stay on fuzzy major or minor values instead of vendor-specific patch pins",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "java-jdk"
+            ],
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "enabled": false
+        },
+        {
             "description": "Group MSTest dependencies into a single PR",
             "matchManagers": [
                 "nuget"
