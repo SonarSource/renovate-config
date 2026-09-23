@@ -24,7 +24,17 @@
     ],
     "packageRules": [
         {
-            "description": "Renovate skips indirect Go dependencies by default; enable them so vulnerable transitive modules can be bumped",
+            "description": "Renovate skips indirect Go dependencies by default; enable them so vulnerable transitive modules can be bumped. Must not carry matchUpdateTypes: the gomod extractor marks indirect deps enabled:false before lookupUpdates runs, and lookupUpdates (which is what computes updateType) is skipped entirely for deps still disabled at that point - so a matchUpdateTypes-filtered rule can never fire to flip enabled back to true.",
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchDepTypes": [
+                "indirect"
+            ],
+            "enabled": true
+        },
+        {
+            "description": "Once indirect deps are enabled above, updateType is known and this can safely filter on it: block major bumps of indirect Go modules, which usually import a path nothing in the tree references and which go mod tidy tends to revert right away",
             "matchManagers": [
                 "gomod"
             ],
@@ -32,11 +42,9 @@
                 "indirect"
             ],
             "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "digest"
+                "major"
             ],
-            "enabled": true
+            "enabled": false
         },
         {
             "matchManagers": [
