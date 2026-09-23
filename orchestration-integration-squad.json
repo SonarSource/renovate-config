@@ -9,6 +9,7 @@
         "docker",
         "docker-compose",
         "github-actions",
+        "gomod",
         "gradle",
         "gradle-wrapper",
         "npm",
@@ -18,7 +19,31 @@
         "* 9 * * 1"
     ],
     "automerge": false,
+    "postUpdateOptions": [
+        "gomodTidy"
+    ],
     "packageRules": [
+        {
+            "description": "Renovate skips indirect Go dependencies by default; enable them so vulnerable transitive modules can be bumped",
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchDepTypes": [
+                "indirect"
+            ],
+            "enabled": true
+        },
+        {
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Go dependencies",
+            "prHeader": "Update non-major Go dependencies"
+        },
         {
             "matchManagers": [
                 "gradle",
