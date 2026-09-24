@@ -39,7 +39,7 @@
             ]
         },
         {
-            "description": "Override inherited manager grouping from default.json, one PR per dependency. groupName null alone leaves the inherited groupSlug, which still shares one branch.",
+            "description": "Override inherited manager grouping from default.json, one PR per dependency",
             "matchManagers": [
                 "maven",
                 "gradle",
