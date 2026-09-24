@@ -39,7 +39,7 @@
             ]
         },
         {
-            "description": "Override inherited manager grouping from default.json, one PR per dependency",
+            "description": "Override inherited manager grouping from default.json, one PR per dependency. groupName null alone leaves the inherited groupSlug, which still shares one branch.",
             "matchManagers": [
                 "maven",
                 "gradle",
@@ -48,7 +48,8 @@
                 "npm",
                 "nuget"
             ],
-            "groupName": null
+            "groupName": null,
+            "groupSlug": null
         },
         {
             "description": "Group all GitHub Actions in the same PR with SHA pinning",
