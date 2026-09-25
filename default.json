@@ -204,6 +204,7 @@
                 "SonarSource/gh-action_release",
                 "SonarSource/gh-action_sbom",
                 "SonarSource/gh-action_slack-notify",
+                "SonarSource/gh-action_terraform",
                 "SonarSource/gh-action-lt-backlog",
                 "SonarSource/mise-action-wrapper",
                 "SonarSource/gh-action_dogfood_merge",
