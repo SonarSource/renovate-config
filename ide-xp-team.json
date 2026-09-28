@@ -48,7 +48,8 @@
                 "npm",
                 "nuget"
             ],
-            "groupName": null
+            "groupName": null,
+            "groupSlug": null
         },
         {
             "description": "Group all GitHub Actions in the same PR with SHA pinning",
