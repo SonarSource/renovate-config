@@ -191,7 +191,7 @@
             ]
         },
         {
-            "description": "ci-github-actions @vN branch refs: resolve branches via github-digest (not semver tags), never SHA-pin.",
+            "description": "Internal SonarSource @vN branch refs: resolve branches via github-digest (not semver tags), never SHA-pin.",
             "matchManagers": [
                 "github-actions"
             ],
@@ -199,6 +199,7 @@
                 "SonarSource/ci-github-actions",
                 "SonarSource/gh-action_azure-artifact-signing",
                 "SonarSource/gh-action_cache",
+                "SonarSource/gh-action_cookiecutter",
                 "SonarSource/gh-action_pre-commit",
                 "SonarSource/gh-action_releasability",
                 "SonarSource/gh-action_release",
