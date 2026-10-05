@@ -153,11 +153,14 @@ On top of the shared default behavior, it:
 
 - disables grouping by default
 - leaves `SonarSource/**` GitHub Actions on floating major refs such as `@v3`
+- schedules `jdx/mise` binary updates before 04:00 on the first day of each month, in the inherited timezone (`CET`), and prevents existing branches from updating outside that window; the inherited minimum release age still applies
 - groups MSTest dependencies, including `Verify.MSTest`
 - groups `Google.Protobuf` with `Grpc.Tools`
 - keeps `FluentAssertions` below `8.0.0` due to change to paid license
 - groups Sonar parent POM updates
 - groups Roslyn dependencies
+
+The monthly mise policy applies to the binary package `jdx/mise`, including versions selected by `mise-action`. It does not change the schedule for the `jdx/mise-action` action itself or tools declared in `mise.toml`. Urgent mise fixes can be requested explicitly through the Dependency Dashboard without waiting for the monthly window.
 
 ## Development
 

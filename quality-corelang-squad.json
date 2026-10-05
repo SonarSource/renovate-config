@@ -53,6 +53,16 @@
             "enabled": false
         },
         {
+            "description": "Update the mise binary monthly to reduce infrastructure dependency PR churn",
+            "matchPackageNames": [
+                "jdx/mise"
+            ],
+            "extends": [
+                "schedule:monthly"
+            ],
+            "updateNotScheduled": false
+        },
+        {
             "description": "Do not raise patch updates for mise-managed tools; repositories should stay on fuzzy major or minor values instead of vendor-specific patch pins",
             "matchManagers": [
                 "mise"
