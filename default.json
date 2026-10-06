@@ -138,12 +138,12 @@
             "minimumReleaseAge": "0 days"
         },
         {
-            "description": "Skip minimumReleaseAge for internal SonarSource GitHub Actions",
+            "description": "Skip minimumReleaseAge for internal SonarSource GitHub Actions (case-insensitive: workflows also reference e.g. 'sonarsource/sonarqube-scan-action')",
             "matchManagers": [
                 "github-actions"
             ],
-            "matchPackagePatterns": [
-                "^SonarSource/"
+            "matchPackageNames": [
+                "/^sonarsource\\//i"
             ],
             "minimumReleaseAge": "0 days"
         },
