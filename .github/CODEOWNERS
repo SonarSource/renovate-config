@@ -12,6 +12,6 @@ ide-xp-team.json @sonarsource/agentic-sdlc-development-experience-squad
 languages-team.json @SonarSource/code-security-cloud-security-squad @SonarSource/code-security-taint-static-typed-languages-squad @sonarsource/code-orchestration-ci-experience-squad
 organization-reporting-squad.json @sonarsource/orchestration-reporting-squad
 orchestration-storage-squad.json @sonarsource/data-agentic-code-data-storage-squad
-quality-abd-squad.json @sonarsource/quality-abd-squad
+quality-abd-squad.json @SonarSource/code-quality-advanced-analysis-techniques-squad
 quality-corelang-squad.json @sonarsource/code-quality-core-languages-parsers-squad
 quality-jvm-squad.json @sonarsource/quality-jvm-squad
