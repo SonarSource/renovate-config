@@ -187,6 +187,18 @@
         },
         {
             "customType": "regex",
+            "description": "Update ARC runner image tags in Flux manifests",
+            "fileMatch": [
+                "^applications/base/arc/.*\\.ya?ml$"
+            ],
+            "matchStrings": [
+                "(?:image|value): (?<depName>275878209202\\.dkr\\.ecr\\.eu-central-1\\.amazonaws\\.com/(?:base|legacy-github-runner)):(?<currentValue>[0-9]+)"
+            ],
+            "datasourceTemplate": "docker",
+            "versioningTemplate": "docker"
+        },
+        {
+            "customType": "regex",
             "description": "Update AMI IDs in Helm gotmpl files",
             "fileMatch": [
                 "\\.gotmpl$"
