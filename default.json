@@ -15,7 +15,7 @@
         "^dotnet restore [^;&|]{0,200}$",
         "^bun install$"
     ],
-    "npmrc": "registry=https://repox.jfrog.io/artifactory/api/npm/npm/\n",
+    "npmrc": "registry=https://repox.sonar.build/artifactory/api/npm/npm/\n",
     "npmrcMerge": true,
     "packageRules": [
         {
@@ -168,8 +168,8 @@
             ],
             "registryUrls": [
                 "https://api.nuget.org/v3/index.json",
-                "https://repox.jfrog.io/artifactory/api/nuget/v3/nuget/index.json",
-                "https://repox.jfrog.io/artifactory/api/nuget/nuget"
+                "https://repox.sonar.build/artifactory/api/nuget/v3/nuget/index.json",
+                "https://repox.sonar.build/artifactory/api/nuget/nuget"
             ]
         },
         {
@@ -178,7 +178,7 @@
                 "npm"
             ],
             "registryUrls": [
-                "https://repox.jfrog.io/artifactory/api/npm/npm/"
+                "https://repox.sonar.build/artifactory/api/npm/npm/"
             ]
         },
         {
@@ -187,7 +187,7 @@
                 "pypi"
             ],
             "registryUrls": [
-                "https://repox.jfrog.io/artifactory/api/pypi/sonarsource-pypi/pypi/"
+                "https://repox.sonar.build/artifactory/api/pypi/sonarsource-pypi/pypi/"
             ]
         },
         {
@@ -236,7 +236,7 @@
                 "^com.sonarsource"
             ],
             "registryUrls": [
-                "https://repox.jfrog.io/artifactory/sonarsource-releases"
+                "https://repox.sonar.build/artifactory/sonarsource-releases"
             ]
         },
         {
@@ -282,6 +282,39 @@
             "description": "Yarn Berry only: exact matchHost required to inject auth into .yarnrc.yml npmRegistries (generic repox.jfrog.io rule above is insufficient)",
             "hostType": "npm",
             "matchHost": "https://repox.jfrog.io/artifactory/api/npm/npm/",
+            "token": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "matchHost": "repox.sonar.build",
+            "token": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "hostType": "pypi",
+            "matchHost": "repox.sonar.build",
+            "token": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "description": "uv/pip: Artifactory PyPI API path used by some indexes and by Renovate extra index URLs",
+            "hostType": "pypi",
+            "matchHost": "https://repox.sonar.build/artifactory/api/pypi/",
+            "username": "renovate-read",
+            "password": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "hostType": "nuget",
+            "matchHost": "repox.sonar.build",
+            "username": "renovate-read",
+            "password": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "hostType": "npm",
+            "matchHost": "repox.sonar.build",
+            "token": "{{ secrets.REPOX_TOKEN }}"
+        },
+        {
+            "description": "Yarn Berry only: exact matchHost required to inject auth into .yarnrc.yml npmRegistries (generic repox.sonar.build rule above is insufficient)",
+            "hostType": "npm",
+            "matchHost": "https://repox.sonar.build/artifactory/api/npm/npm/",
             "token": "{{ secrets.REPOX_TOKEN }}"
         }
     ],
