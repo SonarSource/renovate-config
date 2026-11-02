@@ -88,6 +88,13 @@
                 "ghcr.io/actions/actions-runner"
             ],
             "minimumReleaseAge": "0 days"
+        },
+        {
+            "description": "Lock file maintenance updates have no release timestamp. With timestamp-required, renovate/stability-days stays pending and prCreation not-pending never opens the PR. Keep minimumReleaseAge so package managers that honor it, such as Poetry via POETRY_SOLVER_MIN_RELEASE_AGE, still apply the cooldown while refreshing the lock.",
+            "matchUpdateTypes": [
+                "lockFileMaintenance"
+            ],
+            "minimumReleaseAgeBehaviour": "timestamp-optional"
         }
     ],
     "vulnerabilityAlerts": {
