@@ -20,7 +20,8 @@
         "cargo",
         "dockerfile",
         "pre-commit",
-        "mise"
+        "mise",
+        "pep621"
     ],
     "packageRules": [
         {
