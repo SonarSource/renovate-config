@@ -68,7 +68,9 @@
             "matchPackagePatterns": [
                 "^275878209202\\.dkr\\.ecr\\.eu-central-1\\.amazonaws\\.com/"
             ],
-            "minimumReleaseAge": "0 days"
+            "minimumReleaseAge": "0 days",
+            "prCreation": "immediate",
+            "internalChecksFilter": "none"
         },
         {
             "description": "Skip minimumReleaseAge for EC2 AMI updates and create PRs immediately",
