@@ -43,6 +43,14 @@
             "groupName": "{{#if sourceRepo}}{{sourceRepo}} monorepo{{else}}{{depName}}{{/if}}",
             "groupSlug": "{{#if sourceRepo}}{{sourceRepo}}{{else}}{{depName}}{{/if}}"
         },
+          {
+            "description": "Group python updates into a single PR",
+            "matchManagers": [
+                "pep621"
+            ],
+            "groupName": "uv dependencies",
+            "separateMajorMinor": false
+        },
         {
             "description": "Do not update SonarSource GH actions, we want the branch-version. Only external actions must have commit ID.",
             "matchManagers": [
