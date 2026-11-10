@@ -1,0 +1,153 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "description": "Shared Renovate preset for Analysis Platform repositories.",
+    "extends": [
+        "local>SonarSource/renovate-config"
+    ],
+    "minimumReleaseAgeBehaviour": "timestamp-optional",
+    "prCreation": "immediate",
+    "rebaseWhen": "never",
+    "addLabels": [
+        "dependencies"
+    ],
+    "enabledManagers": [
+        "github-actions",
+        "maven",
+        "nuget",
+        "gradle",
+        "gradle-wrapper",
+        "npm",
+        "cargo",
+        "dockerfile",
+        "pre-commit",
+        "mise",
+        "pep621"
+    ],
+    "packageRules": [
+        {
+            "description": "Don't group updates by default",
+            "matchPackageNames": [
+                "*"
+            ],
+            "groupName": null
+        },
+        {
+            "description": "Group updates per source repository (monorepo), fallback to per dependency.",
+            "matchManagers": [
+                "npm",
+                "maven",
+                "gradle",
+                "nuget",
+                "cargo"
+            ],
+            "groupName": "{{#if sourceRepo}}{{sourceRepo}} monorepo{{else}}{{depName}}{{/if}}",
+            "groupSlug": "{{#if sourceRepo}}{{sourceRepo}}{{else}}{{depName}}{{/if}}"
+        },
+        {
+            "description": "Group python updates into a single PR",
+            "matchManagers": [
+                "pep621"
+            ],
+            "groupName": "uv dependencies",
+            "separateMajorMinor": false
+        },
+        {
+            "description": "Do not update SonarSource GH actions, we want the branch-version. Only external actions must have commit ID.",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchDepNames": [
+                "SonarSource/**"
+            ],
+            "enabled": false
+        },
+        {
+            "description": "Update the mise binary monthly to reduce infrastructure dependency PR churn",
+            "matchPackageNames": [
+                "jdx/mise"
+            ],
+            "extends": [
+                "schedule:monthly"
+            ],
+            "updateNotScheduled": false
+        },
+        {
+            "description": "Do not raise patch updates for mise-managed tools; repositories should stay on fuzzy major or minor values instead of vendor-specific patch pins",
+            "matchManagers": [
+                "mise"
+            ],
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "enabled": false
+        },
+        {
+            "description": "Do not raise patch updates for setup-java runtime selectors; repositories should stay on fuzzy major or minor values instead of vendor-specific patch pins",
+            "matchManagers": [
+                "github-actions"
+            ],
+            "matchPackageNames": [
+                "java-jdk"
+            ],
+            "matchUpdateTypes": [
+                "patch"
+            ],
+            "enabled": false
+        },
+        {
+            "description": "Group MSTest dependencies into a single PR",
+            "matchManagers": [
+                "nuget"
+            ],
+            "matchPackageNames": [
+                "MSTest.**",
+                "Microsoft.NET.Test.Sdk",
+                "Verify.MSTest"
+            ],
+            "groupName": "MSTest"
+        },
+        {
+            "description": "Group protobuf packages together - Grpc.Tools bundles protoc which must be compatible with the Google.Protobuf runtime",
+            "matchManagers": [
+                "nuget"
+            ],
+            "matchPackageNames": [
+                "Google.Protobuf",
+                "Grpc.Tools"
+            ],
+            "groupName": "protobuf"
+        },
+        {
+            "description": "Do not update FluentAssertions above v7 due to license change",
+            "matchManagers": [
+                "nuget"
+            ],
+            "matchPackageNames": [
+                "FluentAssertions"
+            ],
+            "allowedVersions": "<8.0.0"
+        },
+        {
+            "description": "Group parent POM updates into a single PR",
+            "matchManagers": [
+                "maven"
+            ],
+            "matchPackageNames": [
+                "org.sonarsource.parent:parent",
+                "com.sonarsource.parent:parent"
+            ],
+            "groupName": "Parent",
+            "groupSlug": "parent"
+        },
+        {
+            "description": "Group Roslyn dependencies into a single PR",
+            "matchManagers": [
+                "nuget"
+            ],
+            "matchPackageNames": [
+                "Microsoft.CodeAnalysis*"
+            ],
+            "groupName": "Roslyn"
+        }
+    ]
+}
