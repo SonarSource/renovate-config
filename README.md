@@ -147,7 +147,7 @@ export KOTLIN_VERSION=2.15.0.2579
   "extends": ["github>SonarSource/renovate-config:quality-corelang-squad"]
 ```
 
-Shared preset for Core Languages & Parsers repositories. It extends the shared `default` preset, keeps `minimumReleaseAgeBehaviour: "timestamp-optional"`, creates PRs immediately, keeps `rebaseWhen: "never"`, adds the `dependencies` label, and enables only `github-actions`, `maven`, `nuget`, `gradle`, `gradle-wrapper`, `npm`, `cargo`, `dockerfile`, `pre-commit`, and `mise`.
+Shared preset for Core Languages & Parsers repositories. It extends the shared `default` preset, keeps `minimumReleaseAgeBehaviour: "timestamp-optional"`, creates PRs immediately, keeps `rebaseWhen: "never"`, adds the `dependencies` label, and enables only `github-actions`, `maven`, `nuget`, `gradle`, `gradle-wrapper`, `npm`, `cargo`, `dockerfile`, `pre-commit`, `mise`, and `pep621`.
 
 On top of the shared default behavior, it:
 
@@ -159,6 +159,7 @@ On top of the shared default behavior, it:
 - keeps `FluentAssertions` below `8.0.0` due to change to paid license
 - groups Sonar parent POM updates
 - groups Roslyn dependencies
+- groups Python dependencies
 
 The monthly mise policy applies to the binary package `jdx/mise`, including versions selected by `mise-action`. It does not change the schedule for the `jdx/mise-action` action itself or tools declared in `mise.toml`. Urgent mise fixes can be requested explicitly through the Dependency Dashboard without waiting for the monthly window.
 
