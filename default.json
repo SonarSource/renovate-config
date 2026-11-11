@@ -13,6 +13,15 @@
     "npmrcMerge": true,
     "packageRules": [
         {
+            "description": "Resolve Maven and Gradle dependency metadata through Repox instead of public repositories",
+            "matchDatasources": [
+                "maven"
+            ],
+            "registryUrls": [
+                "https://repox.jfrog.io/artifactory/sonarsource"
+            ]
+        },
+        {
             "matchDepTypes": [
                 "action"
             ],
