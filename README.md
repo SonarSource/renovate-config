@@ -36,11 +36,15 @@ To reduce Renovate PR volume, the shared `default` preset groups updates by mana
 Manager-based groups currently include: `github-actions`, `maven`, `gradle` (including `gradle-wrapper`), `npm`, `poetry`, `pipenv`, `pip_requirements`, `nuget`, `terraform`, `helmfile`, and `mise`.
 The preset also includes an additional non-manager grouping rule that groups all `mise` updates together.
 
+#### Maven registries
+
+Maven and Gradle dependency version lookups use Repox through Renovate's Maven datasource. Internal SonarSource release artifacts keep their dedicated registry. This routing applies to both Mend-hosted and self-hosted Renovate, independently of Maven and Gradle build settings.
+
 #### Authentication
 
 Provides authentication credentials to https://repox.jfrog.io. The following package managers were tested for compatibility: `npm`, `maven`, `gradle`, `pipenv`, `poetry`, `nuget`, and `uv`.
 
-> Note: authentication only works when Renovate is executed using the GitHub app. If you are running locally, see the instructions at [local-testing](#local-testing).
+The preset reads credentials from the `REPOX_TOKEN` Renovate secret. Self-hosted and local runs must supply this secret or equivalent `hostRules` credentials. For local runs, see [local testing](#local-testing).
 
 ### [`dev-infra-squad`](dev-infra-squad.json)
 ```json
