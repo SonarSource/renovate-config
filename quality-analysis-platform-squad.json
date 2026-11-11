@@ -1,6 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "description": "Shared Renovate preset for Core Languages & Parsers repositories.",
+    "description": "Shared Renovate preset for Analysis Platform repositories.",
     "extends": [
         "local>SonarSource/renovate-config"
     ],
@@ -43,7 +43,7 @@
             "groupName": "{{#if sourceRepo}}{{sourceRepo}} monorepo{{else}}{{depName}}{{/if}}",
             "groupSlug": "{{#if sourceRepo}}{{sourceRepo}}{{else}}{{depName}}{{/if}}"
         },
-          {
+        {
             "description": "Group python updates into a single PR",
             "matchManagers": [
                 "pep621"

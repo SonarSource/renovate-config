@@ -13,5 +13,5 @@ languages-team.json @SonarSource/code-security-cloud-security-squad @SonarSource
 organization-reporting-squad.json @sonarsource/orchestration-reporting-squad
 orchestration-storage-squad.json @sonarsource/data-agentic-code-data-storage-squad
 quality-abd-squad.json @SonarSource/code-quality-advanced-analysis-techniques-squad
-quality-corelang-squad.json @sonarsource/code-quality-core-languages-parsers-squad
+quality-analysis-platform-squad.json @sonarsource/code-quality-analysis-platform-squad
 quality-jvm-squad.json @sonarsource/quality-jvm-squad
