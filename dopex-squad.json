@@ -1,0 +1,115 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "github>SonarSource/renovate-config",
+        "config:best-practices",
+        ":timezone(CET)"
+    ],
+    "enabledManagers": [
+        "dockerfile",
+        "docker-compose",
+        "github-actions",
+        "gomod",
+        "gradle",
+        "gradle-wrapper",
+        "npm",
+        "poetry"
+    ],
+    "schedule": [
+        "* 9 * * 1"
+    ],
+    "automerge": false,
+    "postUpdateOptions": [
+        "gomodTidy"
+    ],
+    "packageRules": [
+        {
+            "description": "Renovate skips indirect Go dependencies by default; enable them so vulnerable transitive modules can be bumped. Must not carry matchUpdateTypes: the gomod extractor marks indirect deps enabled:false before lookupUpdates runs, and lookupUpdates (which is what computes updateType) is skipped entirely for deps still disabled at that point - so a matchUpdateTypes-filtered rule can never fire to flip enabled back to true.",
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchDepTypes": [
+                "indirect"
+            ],
+            "enabled": true
+        },
+        {
+            "description": "Once indirect deps are enabled above, updateType is known and this can safely filter on it: block major bumps of indirect Go modules, which usually import a path nothing in the tree references and which go mod tidy tends to revert right away",
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchDepTypes": [
+                "indirect"
+            ],
+            "matchUpdateTypes": [
+                "major"
+            ],
+            "enabled": false
+        },
+        {
+            "matchManagers": [
+                "gomod"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Go dependencies",
+            "prHeader": "Update non-major Go dependencies"
+        },
+        {
+            "matchManagers": [
+                "gradle",
+                "gradle-wrapper"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Java/Gradle dependencies",
+            "prHeader": "Update non-major Java/Gradle dependencies"
+        },
+        {
+            "matchManagers": [
+                "npm"
+            ],
+            "groupName": "NPM dependencies",
+            "prHeader": "Update NPM dependencies"
+        },
+        {
+            "matchManagers": [
+                "poetry"
+            ],
+            "matchUpdateTypes": [
+                "minor",
+                "patch"
+            ],
+            "groupName": "Non-major Python/Poetry dependencies",
+            "prHeader": "Update non-major Python/Poetry dependencies"
+        },
+        {
+            "matchFileNames": [
+                "**/libs.versions.toml",
+                "**/build.gradle"
+            ],
+            "addLabels": [
+                "gradle"
+            ]
+        },
+        {
+            "matchFileNames": [
+                "**/pyproject.toml"
+            ],
+            "addLabels": [
+                "poetry"
+            ]
+        }
+    ],
+    "vulnerabilityAlerts": {
+        "enabled": true,
+        "labels": [
+            "vulnerability-alert"
+        ]
+    },
+    "osvVulnerabilityAlerts": true
+}
