@@ -24,6 +24,13 @@
     "draftPR": false,
     "packageRules": [
         {
+            "description": "SC-62895: JFrog 6.0.5 breaks publishing individual Gradle modules. Skip this version until the upstream regression is fixed: https://github.com/jfrog/artifactory-gradle-plugin/issues/175",
+            "matchPackageNames": [
+                "com.jfrog.artifactory:com.jfrog.artifactory.gradle.plugin"
+            ],
+            "allowedVersions": "!/^6\\.0\\.5$/"
+        },
+        {
             "matchPackageNames": [
                 "org.openapitools:openapi-generator-gradle-plugin",
                 "com.sonarsource.sca:*",
