@@ -294,7 +294,7 @@
     "customManagers": [
         {
             "customType": "regex",
-            "description": "Update Mise version in jdx/mise-action. Matches: 'jdx/mise-action@...' followed by 'with:' block containing 'version: <currentValue>'",
+            "description": "Update Mise version in jdx/mise-action and step-security/mise-action. Matches: '<jdx|step-security>/mise-action@...' followed by 'with:' block containing 'version: <currentValue>'",
             "managerFilePatterns": [
                 "/(^|/)workflow-templates/.+\\.ya?ml$/",
                 "/(^|/)\\.github/workflows/.+\\.ya?ml$/",
@@ -305,7 +305,7 @@
             "packageNameTemplate": "jdx/mise",
             "depNameTemplate": "mise",
             "matchStrings": [
-                "jdx/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)"
+                "(?:jdx|step-security)/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)"
             ],
             "extractVersionTemplate": "^v(?<version>.*)$",
             "versioningTemplate": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
