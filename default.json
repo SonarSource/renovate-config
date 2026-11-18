@@ -305,8 +305,8 @@
             "packageNameTemplate": "jdx/mise",
             "depNameTemplate": "mise",
             "matchStrings": [
-                "(?:jdx|step-security)/mise-action[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?\\s*version:\\s*(?<currentValue>[\\d.]+)",
-                "SonarSource/mise-action-wrapper[^\\n]*\\n\\s*with:\\s*\\n(?:\\s+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?\\s*(?:mise-)?version:\\s*(?<currentValue>[\\d.]+)"
+                "(?:jdx|step-security)/mise-action[^\\n]*\\n[ \\t]*with:[ \\t]*\\n(?:[ \\t]+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?[ \\t]*version:\\s*(?<currentValue>[\\d.]+)",
+                "SonarSource/mise-action-wrapper[^\\n]*\\n[ \\t]*with:[ \\t]*\\n(?:[ \\t]+[a-zA-Z_][^:\\s]*:[^\\n]*\\n)*?[ \\t]*(?:mise-)?version:\\s*(?<currentValue>[\\d.]+)"
             ],
             "extractVersionTemplate": "^v(?<version>.*)$",
             "versioningTemplate": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
